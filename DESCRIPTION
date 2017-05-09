@@ -15,6 +15,7 @@ Description: R toolbox for the postprocessing of the AtmoSwing (Analog
 License: GPL-3
 Depends: R (>= 3.1.0)
 Imports: ncdf4, astroFns
+Suggests: testthat
 URL: https://github.com/atmoswing/R-toolbox
 BugReports: https://github.com/atmoswing/R-toolbox/issues
 RoxygenNote: 6.0.1
