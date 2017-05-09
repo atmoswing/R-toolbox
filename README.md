@@ -6,7 +6,7 @@ You can use devtools to install the package:
 ```r
 install.packages('devtools')
 library('devtools')
-install_github(repo='atmoswing/postprocess-R',dependencies=T)
+install_github(repo='atmoswing/R-toolbox',dependencies=T)
 library(atmoswingRToolbox)
 ?atmoswingRToolbox
 ```
