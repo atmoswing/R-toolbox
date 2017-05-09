@@ -1,12 +1,11 @@
 #' Continuous ranked probability score
 #'
 #' Process the CRPS score for a given probability prediction compared to an observed value. 
-#' The non-exceedence freequency is processed as follows: \code{"F(x) = (r-a)/(n+b)"}
+#' The non-exceedence freequency is processed as follows: \code{F(x) = (r-a)/(n+b)}
 #'
 #' @param x vector of length n (number of members / analogues)
 #' @param x0 observed value
-#' @param a constant that has a law-dependent optimum from which the samples are derived
-#' @param b constant that has a law-dependent optimum from which the samples are derived
+#' @param a,b constants that have a law-dependent optimum from which the samples are derived
 #'
 #' @return Value of the CRPS score
 #'
