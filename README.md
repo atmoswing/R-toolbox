@@ -1,4 +1,4 @@
-# postprocess-R
+# AtmoSwing R toolbox
 Postprocessing of the AtmoSwing results in R
 
 You can use devtools to install the package:
