@@ -17,3 +17,4 @@ Depends: R (>= 3.1.0)
 Imports: ncdf4, astroFns
 URL: https://github.com/atmoswing/R-toolbox
 BugReports: https://github.com/atmoswing/R-toolbox/issues
+RoxygenNote: 6.0.1
