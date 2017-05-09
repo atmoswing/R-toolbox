@@ -10,10 +10,9 @@
 #' @return Value of the CRPS score
 #'
 #' @examples
-#' data <- read.table('testdaten.txt',header=F)
-#' x <- sqrt(data$V5/70.82)
-#' x0 <- sqrt(24.4/70.82)
-#' result <- CRPS(x, x0, a=0.375, b=0.25)
+#' obs <- 25.8
+#' precip <- c(35.3, 31.5, 14.9, 30.0, 3.0, 4.2, 15.1, 1.9, 1.2, 2.1)
+#' result <- atmoswingRToolbox::CRPS(precip, obs, a=0.375, b=0.25)
 #'
 #' @export
 
