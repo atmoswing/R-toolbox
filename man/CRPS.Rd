@@ -11,21 +11,18 @@ CRPS(x, x0, a = 0.44, b = 0.12)
 
 \item{x0}{observed value}
 
-\item{a}{constant that has a law-dependent optimum from which the samples are derived}
-
-\item{b}{constant that has a law-dependent optimum from which the samples are derived}
+\item{a, b}{constants that have a law-dependent optimum from which the samples are derived}
 }
 \value{
 Value of the CRPS score
 }
 \description{
 Process the CRPS score for a given probability prediction compared to an observed value. 
-The non-exceedence freequency is processed as follows: \code{"F(x) = (r-a)/(n+b)"}
+The non-exceedence freequency is processed as follows: \code{F(x) = (r-a)/(n+b)}
 }
 \examples{
-data <- read.table('testdaten.txt',header=F)
-x <- sqrt(data$V5/70.82)
-x0 <- sqrt(24.4/70.82)
-result <- CRPS(x, x0, a=0.375, b=0.25)
+obs <- 25.8
+precip <- c(35.3, 31.5, 14.9, 30.0, 3.0, 4.2, 15.1, 1.9, 1.2, 2.1)
+result <- atmoswingRToolbox::CRPS(precip, obs, a=0.375, b=0.25)
 
 }
