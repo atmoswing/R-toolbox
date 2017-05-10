@@ -15,8 +15,6 @@ library(assertthat)
 #'
 #' @examples
 #' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
-#'
-#' @export
 #' 
 parseNcOutputs <- function(directory, station.id, period) {
   

@@ -15,8 +15,6 @@
 #' obs <- 25.8
 #' precip <- c(35.3, 31.5, 14.9, 30.0, 3.0, 4.2, 15.1, 1.9, 1.2, 2.1)
 #' result <- atmoswingRToolbox::crps(precip, obs, a=0.375, b=0.25)
-#'
-#' @export
 #' 
 crps <- function(x, x0, a=0.44, b=0.12) {
   
@@ -75,8 +73,6 @@ crps <- function(x, x0, a=0.44, b=0.12) {
 #' @examples
 #' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
 #' res <- atmoswingRToolbox::crpsNbAnalogs(data, 9)
-#'
-#' @export
 #' 
 crpsNbAnalogs <- function(A, filter.size = 9) {
   
