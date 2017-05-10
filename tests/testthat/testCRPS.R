@@ -10,7 +10,7 @@ test_that("CRPS is correct for 1962-01-01", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.20294, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.20294, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-02", {
@@ -22,7 +22,7 @@ test_that("CRPS is correct for 1962-01-02", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.21813, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.21813, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-03", {
@@ -34,7 +34,7 @@ test_that("CRPS is correct for 1962-01-03", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.01638, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.01638, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-04", {
@@ -46,7 +46,7 @@ test_that("CRPS is correct for 1962-01-04", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.00463, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.00463, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-05", {
@@ -58,7 +58,7 @@ test_that("CRPS is correct for 1962-01-05", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.00046, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.00046, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-06", {
@@ -70,7 +70,7 @@ test_that("CRPS is correct for 1962-01-06", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.00771, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.00771, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-07", {
@@ -82,7 +82,7 @@ test_that("CRPS is correct for 1962-01-07", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.00176, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.00176, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-09", {
@@ -94,7 +94,7 @@ test_that("CRPS is correct for 1962-01-09", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.06690, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.06690, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-10", {
@@ -106,7 +106,7 @@ test_that("CRPS is correct for 1962-01-10", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.05612, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.05612, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-11", {
@@ -118,7 +118,7 @@ test_that("CRPS is correct for 1962-01-11", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.06618, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.06618, tolerance = .00003)
 })
 
 test_that("CRPS is correct for 1962-01-12", {
@@ -130,7 +130,7 @@ test_that("CRPS is correct for 1962-01-12", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.25168, tolerance = .00004)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.25168, tolerance = .00004)
 })
 
 test_that("CRPS is correct for 1983-11-26", {
@@ -142,7 +142,7 @@ test_that("CRPS is correct for 1983-11-26", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.53505, tolerance = .00008)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.53505, tolerance = .00008)
 })
 
 test_that("CRPS is correct for 1983-11-27", {
@@ -154,7 +154,7 @@ test_that("CRPS is correct for 1983-11-27", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.15578, tolerance = .00008)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.15578, tolerance = .00008)
 })
 
 test_that("CRPS is correct for 1983-11-29", {
@@ -166,5 +166,5 @@ test_that("CRPS is correct for 1983-11-29", {
   x <- sqrt(precip/70.82)
   x0 <- sqrt(obs/70.82)
   
-  expect_equal(atmoswingRToolbox::CRPS(x, x0, a=0.375, b=0.25), 0.06754, tolerance = .00003)
+  expect_equal(atmoswingRToolbox::crps(x, x0, a=0.375, b=0.25), 0.06754, tolerance = .00003)
 })
