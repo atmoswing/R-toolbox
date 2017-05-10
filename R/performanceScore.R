@@ -1,13 +1,15 @@
-#' Continuous ranked probability score
+#' Continuous ranked probability score.
 #'
-#' Process the CRPS score for a given probability prediction compared to an observed value. 
-#' The non-exceedence freequency is processed as follows: \code{F(x) = (r-a)/(n+b)}
+#' Process the CRPS score for a given probability prediction compared to an 
+#' observed value. The non-exceedence freequency is processed as follows: 
+#' \code{F(x) = (r-a)/(n+b)}
 #'
-#' @param x vector of length n (number of members / analogues)
-#' @param x0 observed value
-#' @param a,b constants that have a law-dependent optimum from which the samples are derived
+#' @param x Vector of length n (number of members / analogues).
+#' @param x0 Observed value.
+#' @param a,b Constants that have a law-dependent optimum from which the samples 
+#'   are derived.
 #'
-#' @return Value of the CRPS score
+#' @return Value of the CRPS score.
 #'
 #' @examples
 #' obs <- 25.8
@@ -15,6 +17,7 @@
 #' result <- atmoswingRToolbox::crps(precip, obs, a=0.375, b=0.25)
 #'
 #' @export
+#' 
 crps <- function(x, x0, a=0.44, b=0.12) {
   
   x.s <- sort(x)
@@ -58,20 +61,23 @@ crps <- function(x, x0, a=0.44, b=0.12) {
   return(res)
 } 
 
-#' Process the CRPS for an increasing number of analogues
+
+#' Process the CRPS for an increasing number of analogues.
 #'
-#' Process the CRPS for an increasing number of analogues for every day of the target period.
+#' Process the CRPS for an increasing number of analogues for every day of the 
+#' target period.
 #'
-#' @param A results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs
-#' @param filter.size length of "running window", has to be odd
+#' @param A Results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs.
+#' @param filter.size Length of "running window", has to be odd.
 #'
-#' @return Matrices with CRPS scores for an increasing number of analogues 
+#' @return Matrices with CRPS scores for an increasing number of analogues.
 #'
 #' @examples
 #' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
 #' res <- atmoswingRToolbox::crpsNbAnalogs(data, 9)
 #'
 #' @export
+#' 
 crpsNbAnalogs <- function(A, filter.size = 9) {
   
   # Calculation on a single row

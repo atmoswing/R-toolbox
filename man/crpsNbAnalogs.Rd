@@ -2,20 +2,21 @@
 % Please edit documentation in R/performanceScore.R
 \name{crpsNbAnalogs}
 \alias{crpsNbAnalogs}
-\title{Process the CRPS for an increasing number of analogues}
+\title{Process the CRPS for an increasing number of analogues.}
 \usage{
 crpsNbAnalogs(A, filter.size = 9)
 }
 \arguments{
-\item{A}{results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs}
+\item{A}{Results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs.}
 
-\item{filter.size}{length of "running window", has to be odd}
+\item{filter.size}{Length of "running window", has to be odd.}
 }
 \value{
-Matrices with CRPS scores for an increasing number of analogues
+Matrices with CRPS scores for an increasing number of analogues.
 }
 \description{
-Process the CRPS for an increasing number of analogues for every day of the target period.
+Process the CRPS for an increasing number of analogues for every day of the 
+target period.
 }
 \examples{
 data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')

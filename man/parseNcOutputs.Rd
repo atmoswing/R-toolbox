@@ -2,24 +2,25 @@
 % Please edit documentation in R/parseOutputs.R
 \name{parseNcOutputs}
 \alias{parseNcOutputs}
-\title{Parse NetCDF files resulting from AtmoSwing optimizer}
+\title{Parse NetCDF files resulting from AtmoSwing optimizer.}
 \usage{
 parseNcOutputs(directory, station.id, period)
 }
 \arguments{
-\item{directory}{directory containing the outputs from AtmoSwing (containing the "calibration" 
-or "validation" directories)}
+\item{directory}{Directory containing the outputs from AtmoSwing (containing 
+the "calibration" or "validation" directories).}
 
-\item{station.id}{ID of the station time series}
+\item{station.id}{ID of the station time series.}
 
-\item{period}{either "calibration" or "validation"}
+\item{period}{Either "calibration" or "validation".}
 }
 \value{
-Results of the analogue method
+Results of the analogue method.
 }
 \description{
-Extract results (for both analogues and the target situations: dates, predictand values, 
-prediction score) from the NetCDF files resulting from AtmoSwing optimizer
+Extract results (for both analogues and the target situations: dates, 
+predictand values, prediction score) from the NetCDF files resulting from 
+AtmoSwing optimizer.
 }
 \examples{
 data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')

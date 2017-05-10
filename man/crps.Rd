@@ -2,23 +2,25 @@
 % Please edit documentation in R/performanceScore.R
 \name{crps}
 \alias{crps}
-\title{Continuous ranked probability score}
+\title{Continuous ranked probability score.}
 \usage{
 crps(x, x0, a = 0.44, b = 0.12)
 }
 \arguments{
-\item{x}{vector of length n (number of members / analogues)}
+\item{x}{Vector of length n (number of members / analogues).}
 
-\item{x0}{observed value}
+\item{x0}{Observed value.}
 
-\item{a, b}{constants that have a law-dependent optimum from which the samples are derived}
+\item{a, b}{Constants that have a law-dependent optimum from which the samples 
+are derived.}
 }
 \value{
-Value of the CRPS score
+Value of the CRPS score.
 }
 \description{
-Process the CRPS score for a given probability prediction compared to an observed value. 
-The non-exceedence freequency is processed as follows: \code{F(x) = (r-a)/(n+b)}
+Process the CRPS score for a given probability prediction compared to an 
+observed value. The non-exceedence freequency is processed as follows: 
+\code{F(x) = (r-a)/(n+b)}
 }
 \examples{
 obs <- 25.8
