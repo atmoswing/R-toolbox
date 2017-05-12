@@ -4,7 +4,7 @@
 \alias{parseNcOutputs}
 \title{Parse NetCDF files resulting from AtmoSwing optimizer.}
 \usage{
-parseNcOutputs(directory, station.id, period)
+parseNcOutputs(directory, station.id, period, level = 1)
 }
 \arguments{
 \item{directory}{Directory containing the outputs from AtmoSwing (containing 
@@ -13,6 +13,8 @@ the "calibration" or "validation" directories).}
 \item{station.id}{ID of the station time series.}
 
 \item{period}{Either "calibration" or "validation".}
+
+\item{level}{Analogy level.}
 }
 \value{
 Results of the analogue method.
