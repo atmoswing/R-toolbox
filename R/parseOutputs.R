@@ -10,23 +10,24 @@ library(assertthat)
 #'   the "calibration" or "validation" directories).
 #' @param station.id ID of the station time series.
 #' @param period Either "calibration" or "validation".
+#' @param level Analogy level.
 #'
 #' @return Results of the analogue method.
 #'
 #' @examples
 #' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
 #' 
-parseNcOutputs <- function(directory, station.id, period) {
+parseNcOutputs <- function(directory, station.id, period, level = 1) {
   
   assert_that((period=='calibration' || period=='validation'), msg = 'period must be "calibration" or "validation"')
   assert_that(is.dir(directory), msg = paste(directory, 'is not a directory'))
   
   # Look for the files
-  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', station.id, '_step_0.nc', sep='')
+  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', station.id, '_step_', level-1, '.nc', sep='')
   assert_that(file.exists(path.values), msg = paste(path.values, 'not found'))
-  path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', station.id, '_step_0.nc', sep='')
+  path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', station.id, '_step_', level-1, '.nc', sep='')
   assert_that(file.exists(path.dates), msg = paste(path.dates, 'not found'))
-  path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', station.id, '_step_0.nc', sep='')
+  path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', station.id, '_step_', level-1, '.nc', sep='')
   assert_that(file.exists(path.scores), msg = paste(path.scores, 'not found'))
   
   # Open all files
@@ -36,14 +37,14 @@ parseNcOutputs <- function(directory, station.id, period) {
   
   # Extract data
   AM <- list(
+    analog.dates.MJD = t(ncdf4::ncvar_get(AD.nc, 'analog_dates')),
+    analog.criteria = t(ncdf4::ncvar_get(AV.nc, 'analog_criteria')),
     analog.values.norm = t(ncdf4::ncvar_get(AV.nc, 'analog_values_norm')),
     analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
-    analog.criteria = t(ncdf4::ncvar_get(AV.nc, 'analog_criteria')),
     target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
     target.dates.UTC = as.Date(astroFns::dmjd2ut(ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d'),
     target.values.norm = ncdf4::ncvar_get(AV.nc, 'target_values_norm'),
     target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
-    analog.dates.MJD = t(ncdf4::ncvar_get(AD.nc, 'analog_dates')),
     predict.score = t(ncdf4::ncvar_get(AS.nc, 'forecast_scores'))
   )
   
