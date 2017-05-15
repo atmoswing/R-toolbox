@@ -17,6 +17,8 @@ library(assertthat)
 #' @examples
 #' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
 #' 
+#' @export
+#' 
 parseNcOutputs <- function(directory, station.id, period, level = 1) {
   
   assert_that((period=='calibration' || period=='validation'), msg = 'period must be "calibration" or "validation"')
