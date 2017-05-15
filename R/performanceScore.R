@@ -14,7 +14,7 @@
 #' @examples
 #' obs <- 25.8
 #' precip <- c(35.3, 31.5, 14.9, 30.0, 3.0, 4.2, 15.1, 1.9, 1.2, 2.1)
-#' result <- atmoswingRToolbox::crps(precip, obs, a=0.375, b=0.25)
+#' result <- atmoswing::crps(precip, obs, a=0.375, b=0.25)
 #' 
 #' @export
 #' 
@@ -67,15 +67,15 @@ crps <- function(x, x0, a=0.44, b=0.12) {
 #' Process the CRPS for an increasing number of analogues for every day of the 
 #' target period.
 #'
-#' @param A Results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs.
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
 #' @param filter.size Length of "running window", has to be odd.
 #'
 #' @return Matrices with CRPS scores for an increasing number of analogues.
 #'
 #' @examples
-#' data <- atmoswingRToolbox::parseNcOutputs('files/optimizer-outputs/1/results',
-#'                                           1, 'validation')
-#' res <- atmoswingRToolbox::crpsNbAnalogs(data, 9)
+#' data <- atmoswing::parseNcOutputs(file.path('tests', 'testthat', 'files', 
+#'             'optimizer-outputs', '1', 'results'), 1, 'validation')
+#' res <- atmoswing::crpsNbAnalogs(data, 9)
 #' 
 #' @export
 #' 
@@ -85,7 +85,7 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
   crpsPerRow <- function(analog.values, target.value) {
     crps <- array(NA, dim = length(analog.values))
     for (i in 1:length(analog.values)) {
-      crps[i] <- atmoswingRToolbox::CRPS(analog.values[1:i], target.value)
+      crps[i] <- atmoswing::crps(analog.values[1:i], target.value)
     }
     return(crps)
   }
