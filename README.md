@@ -1,4 +1,4 @@
-# AtmoSwing R toolbox
+# AtmoSwing R toolbox [![Build Status](https://travis-ci.org/atmoswing/R-toolbox.svg?branch=master)](https://travis-ci.org/atmoswing/R-toolbox)
 Postprocessing of the AtmoSwing results in R
 
 You can use devtools to install the package:
