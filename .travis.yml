@@ -5,6 +5,7 @@ r:
  - devel
 r_packages:
  - testthat
+cache: packages
 sudo: false
 addons:
   apt:

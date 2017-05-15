@@ -7,7 +7,7 @@
 crpsNbAnalogs(A, filter.size = 9)
 }
 \arguments{
-\item{A}{Results of AtmoSwing as parsed by atmoswingRToolbox::parseNcOutputs.}
+\item{A}{Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.}
 
 \item{filter.size}{Length of "running window", has to be odd.}
 }
@@ -19,8 +19,8 @@ Process the CRPS for an increasing number of analogues for every day of the
 target period.
 }
 \examples{
-data <- atmoswingRToolbox::parseNcOutputs('files/optimizer-outputs/1/results',
-                                          1, 'validation')
-res <- atmoswingRToolbox::crpsNbAnalogs(data, 9)
+data <- atmoswing::parseNcOutputs(file.path('tests', 'testthat', 'files', 
+            'optimizer-outputs', '1', 'results'), 1, 'validation')
+res <- atmoswing::crpsNbAnalogs(data, 9)
 
 }

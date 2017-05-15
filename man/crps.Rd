@@ -25,6 +25,6 @@ observed value. The non-exceedence freequency is processed as follows:
 \examples{
 obs <- 25.8
 precip <- c(35.3, 31.5, 14.9, 30.0, 3.0, 4.2, 15.1, 1.9, 1.2, 2.1)
-result <- atmoswingRToolbox::crps(precip, obs, a=0.375, b=0.25)
+result <- atmoswing::crps(precip, obs, a=0.375, b=0.25)
 
 }
