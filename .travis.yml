@@ -1,8 +1,11 @@
 language: r
 r:
-  - oldrel
-  - release
-  - devel
+ - oldrel
+ - release
+ - devel
+r_packages:
+ - testthat
+ - assertthat
 cache: packages
 sudo: false
 addons:
