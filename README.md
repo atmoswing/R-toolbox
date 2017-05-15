@@ -7,6 +7,6 @@ You can use devtools to install the package:
 install.packages('devtools')
 library('devtools')
 install_github(repo='atmoswing/R-toolbox',dependencies=T)
-library(atmoswingRToolbox)
-?atmoswingRToolbox
+library(atmoswing)
+?atmoswing
 ```
