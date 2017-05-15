@@ -42,18 +42,18 @@ crps <- function(x, x0, a=0.44, b=0.12) {
       if (x.s[i] < x0) {
         # Case 1: next value also on left side of observed value
         if (x.s[i + 1] <= x0) {
-          res <- res + (Fx[i] ^ 2 + Fx[i + 1] ^ 2) * (x.s[i + 1] - x.s[i]) / 2
+          res <- res + (Fx[i] ^ 2 + Fx[i+1] ^ 2) * (x.s[i+1] - x.s[i]) / 2
         }
         # Case 2: x0 before next value
         else {
-          F0 <- (Fx[i + 1] - Fx[i]) * (x0 - x.s[i]) / (x.s[i + 1] - x.s[i]) + Fx[i]
+          F0 <- (Fx[i+1] - Fx[i]) * (x0 - x.s[i]) / (x.s[i+1] - x.s[i]) + Fx[i]
           res <- res + (F0 ^ 2 + Fx[i] ^ 2) * (x0 - x.s[i]) / 2
-          res <- res + ((F0 - 1) ^ 2 + (Fx[i + 1] - 1) ^ 2) * (x.s[i + 1] - x0) / 2
+          res <- res + ((F0 - 1) ^ 2 + (Fx[i+1] - 1) ^ 2) * (x.s[i+1] - x0) / 2
         }
       }
       # If value on the right side of observed value
       else {
-        res <- res + ((Fx[i] - 1) ^ 2 + (Fx[i + 1] - 1) ^ 2) * (x.s[i + 1] - x.s[i]) / 2
+        res <- res + ((Fx[i] - 1) ^ 2 + (Fx[i+1] - 1) ^ 2) * (x.s[i+1] - x.s[i]) / 2
       }
     }
   }

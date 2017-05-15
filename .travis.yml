@@ -5,7 +5,6 @@ r:
  - devel
 r_packages:
  - testthat
- - assertthat
 cache: packages
 sudo: false
 addons:
