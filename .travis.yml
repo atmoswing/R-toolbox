@@ -1,10 +1,12 @@
 language: r
 r:
- - oldrel
- - release
- - devel
+  - oldrel
+  - release
+  - devel
 r_packages:
- - testthat
+  - testthat
+r_github_packages:
+  - jimhester/covr
 cache: packages
 sudo: false
 addons:
@@ -12,3 +14,5 @@ addons:
     packages:
       - libnetcdf-dev
       - netcdf-bin
+after_success:
+  - Rscript -e 'covr::coveralls()'
