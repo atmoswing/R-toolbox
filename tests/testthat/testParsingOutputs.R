@@ -2,8 +2,8 @@ library(atmoswing)
 context("Parsing outputs")
 
 test_that("NetCDF outputs are correctly parsed for 1 level of analogy, calibration", {
-  expect_true(is.dir(file.path('files', 'optimizer-outputs', '1', 'results')))
-  A <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', '1', 'results'),
+  expect_true(is.dir(file.path('test_files', 'optimizer-outputs', '1', 'results')))
+  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '1', 'results'),
                                  1, 'calibration')
   
   expect_equal(A$analog.dates.MJD[1,1], 53777.0)
@@ -35,8 +35,8 @@ test_that("NetCDF outputs are correctly parsed for 1 level of analogy, calibrati
 })
 
 test_that("NetCDF outputs are correctly parsed for 1 level of analogy, validation", {
-  expect_true(is.dir(file.path('files', 'optimizer-outputs', '1', 'results')))
-  A <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', '1', 'results'),
+  expect_true(is.dir(file.path('test_files', 'optimizer-outputs', '1', 'results')))
+  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '1', 'results'),
                                  1, 'validation')
   
   expect_equal(A$analog.dates.MJD[1,1], 49666.0)
@@ -68,8 +68,8 @@ test_that("NetCDF outputs are correctly parsed for 1 level of analogy, validatio
 })
 
 test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, calibration", {
-  expect_true(is.dir(file.path('files', 'optimizer-outputs', '2', 'results')))
-  A <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', '2', 'results'),
+  expect_true(is.dir(file.path('test_files', 'optimizer-outputs', '2', 'results')))
+  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '2', 'results'),
                                  1, 'calibration', 2)
   
   expect_equal(A$analog.dates.MJD[1,1], 46076.0)
@@ -101,8 +101,8 @@ test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, cal
 })
 
 test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, validation", {
-  expect_true(is.dir(file.path('files', 'optimizer-outputs', '2', 'results')))
-  A <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', '2', 'results'),
+  expect_true(is.dir(file.path('test_files', 'optimizer-outputs', '2', 'results')))
+  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '2', 'results'),
                                  1, 'validation', 2)
   
   expect_equal(A$analog.dates.MJD[1,1], 51216.0)

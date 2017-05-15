@@ -13,8 +13,10 @@
 #' @return Results of the analogue method.
 #'
 #' @examples
-#' data <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', 
+#' \dontrun{
+#' data <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', 
 #'                                   '1', 'results'), 1, 'validation')
+#' }
 #' 
 #' @export
 #' 
