@@ -19,8 +19,10 @@ Process the CRPS for an increasing number of analogues for every day of the
 target period.
 }
 \examples{
-data <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', 
+\dontrun{
+data <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', 
                                   '1', 'results'), 1, 'validation')
 res <- atmoswing::crpsNbAnalogs(data, 9)
+}
 
 }
