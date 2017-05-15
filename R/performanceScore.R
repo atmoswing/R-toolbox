@@ -73,8 +73,8 @@ crps <- function(x, x0, a=0.44, b=0.12) {
 #' @return Matrices with CRPS scores for an increasing number of analogues.
 #'
 #' @examples
-#' data <- atmoswing::parseNcOutputs(file.path('tests', 'testthat', 'files', 
-#'             'optimizer-outputs', '1', 'results'), 1, 'validation')
+#' data <- atmoswing::parseNcOutputs(file.path('files', 'optimizer-outputs', 
+#'                                   '1', 'results'), 1, 'validation')
 #' res <- atmoswing::crpsNbAnalogs(data, 9)
 #' 
 #' @export
