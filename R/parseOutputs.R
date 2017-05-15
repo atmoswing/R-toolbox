@@ -13,7 +13,8 @@
 #' @return Results of the analogue method.
 #'
 #' @examples
-#' data <- atmoswingRToolbox::parseNcOutputs('path/to/dir', 22, 'calibration')
+#' data <- atmoswingRToolbox::parseNcOutputs('files/optimizer-outputs/1/results',
+#'                                           1, 'validation')
 #' 
 #' @export
 #' 
