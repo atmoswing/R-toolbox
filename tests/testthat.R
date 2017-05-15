@@ -1,4 +1,4 @@
 library(testthat)
-library(atmoswingRToolbox)
+library(atmoswing)
 
-test_check("atmoswingRToolbox")
+test_check("atmoswing")

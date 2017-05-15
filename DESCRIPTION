@@ -1,4 +1,4 @@
-Package: atmoswingRToolbox
+Package: atmoswing
 Type: Package
 Title: Postprocessing of the AtmoSwing results in R 
 Version: 0.5
