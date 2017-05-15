@@ -99,7 +99,7 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
   
   # Moving average
   ma <- function(x, n = 9) {
-    filter(x, rep(1 / n, n), sides = 2)
+    stats::filter(x, rep(1 / n, n), sides = 2)
   }
   
   # Smooth with a running average
