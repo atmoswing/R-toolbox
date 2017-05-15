@@ -23,7 +23,8 @@ parseNcOutputs <- function(directory, station.id, period, level = 1) {
   assertthat::assert_that((period=='calibration' || period=='validation'), 
                           msg = 'period must be "calibration" or "validation"')
   assertthat::assert_that(assertthat::is.dir(directory), 
-                          msg = paste(directory, 'is not a directory'))
+                          msg = paste(directory, 'is not a directory (wd:', 
+                                      getwd(), ')'))
   
   # Look for the files
   path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
