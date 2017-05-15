@@ -5,7 +5,7 @@ test_that("NetCDF outputs are correctly parsed for 1 level of analogy, calibrati
   A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '1', 'results'),
                                  1, 'calibration')
   
-  expect_equal(A$analog.dates.MJD[1,1], 63777.0)
+  expect_equal(A$analog.dates.MJD[1,1], 53777.0)
   expect_equal(A$analog.dates.MJD[19,1], 48960.0)
   expect_equal(A$analog.dates.MJD[23,5], 47875.0)
   
