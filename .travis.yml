@@ -5,3 +5,7 @@ r:
   - devel
 cache: packages
 sudo: false
+addons:
+  apt:
+    packages:
+      - libnetcdf-dev
