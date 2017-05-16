@@ -14,8 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', 
-#'                                   '1', 'results'), 1, 'validation')
+#' data <- atmoswing::parseNcOutputs('optimizer-outputs/1/results', 1, 'validation')
 #' }
 #' 
 #' @export

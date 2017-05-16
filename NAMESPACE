@@ -2,4 +2,5 @@
 
 export(crps)
 export(crpsNbAnalogs)
+export(optimalNbAnalog)
 export(parseNcOutputs)
