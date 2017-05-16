@@ -71,10 +71,12 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
 optimalNbAnalog <- function(crps.matrix) {
   
   nb.min.first <- apply(crps.matrix, 1, which.min)
+  nb.min.med <- apply(crps.matrix, 1, function(x) median(which(x==min(x, na.rm = TRUE))))
   nb.min.last <- apply(crps.matrix, 1, function(x) max(which(x==min(x, na.rm = TRUE))))
 
   # Pack results
   res <- list(nb.min.first = nb.min.first,
+              nb.min.med = nb.min.med,
               nb.min.last = nb.min.last)
   
   return(res)
