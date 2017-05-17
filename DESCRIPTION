@@ -11,14 +11,15 @@ Author: Pascal Developer [aut, cre],
 Maintainer: Pascal Horton <pascal.horton@giub.unibe.ch>
 Description: R toolbox for the postprocessing of the AtmoSwing (Analog 
     Technique Model for Statistical weather forecastING) results, which
-    is an implementation of the analogue method for precipitation prediction
+    is an implementation of the analogue method for precipitation prediction.
 License: GPL (>= 2) | file LICENSE
 Depends: 
     R (>= 3.1.0)
 Imports: 
     assertthat,
 	astroFns,
-	ncdf4
+	ncdf4,
+	stats
 Suggests: 
     testthat
 URL: https://github.com/atmoswing/R-toolbox

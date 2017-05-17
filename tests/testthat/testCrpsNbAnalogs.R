@@ -2,7 +2,7 @@ library(atmoswing)
 context("CRPS nb analogues")
 
 test_that("CRPS per analogue number is correct", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optimizer-outputs', '1', 'results'),
+  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
                                  1, 'calibration')
   
   res <- atmoswing::crpsNbAnalogs(A, 5)
