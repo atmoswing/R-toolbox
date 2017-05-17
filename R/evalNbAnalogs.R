@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optimizer-outputs/1/results', 1, 'validation')
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
 #' res <- atmoswing::crpsNbAnalogs(data, 9)
 #' }
 #' 
@@ -57,13 +57,13 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
 #'
 #' @param crps.matrix Results of atmoswing::crpsNbAnalogs.
 #'
-#' @return Vector of the optimal number of analogues for each target date..
+#' @return Vector of the optimal number of analogues for each target date.
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optimizer-outputs/1/results', 1, 'validation')
-#' res.crps <- atmoswing::crpsNbAnalogs(data, 9)
-#' res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed, 9)
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' res.crps <- atmoswing::crpsNbAnalogs(data)
+#' res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
 #' }
 #' 
 #' @export
@@ -71,7 +71,7 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
 optimalNbAnalog <- function(crps.matrix) {
   
   nb.min.first <- apply(crps.matrix, 1, which.min)
-  nb.min.med <- apply(crps.matrix, 1, function(x) median(which(x==min(x, na.rm = TRUE))))
+  nb.min.med <- apply(crps.matrix, 1, function(x) stats::median(which(x==min(x, na.rm = TRUE))))
   nb.min.last <- apply(crps.matrix, 1, function(x) max(which(x==min(x, na.rm = TRUE))))
 
   # Pack results
@@ -80,4 +80,40 @@ optimalNbAnalog <- function(crps.matrix) {
               nb.min.last = nb.min.last)
   
   return(res)
+}
+
+
+#' Assign the optimal number of analogues to every analogue date
+#'
+#' Assign the optimal number of analogues to every analogue date. This only
+#' works on the calibration period, where the optimal number of analogues can
+#' be assessed for the non independent dates.
+#'
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param target.a.nb Results of atmoswing::optimalNbAnalog
+#'
+#' @return Matrix of the optimal number of analogues for each analogue date.
+#'
+#' @examples
+#' \dontrun{
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' res.crps <- atmoswing::crpsNbAnalogs(data)
+#' target.a.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
+#' res <- atmoswing::optimalNbAnalogOfAnalogs(data, target.a.nb$nb.min.med)
+#' }
+#' 
+#' @export
+#' 
+optimalNbAnalogOfAnalogs <- function(A, target.a.nb) {
+
+  analog.a.nb <- matrix(NA, nrow = nrow(A$analog.dates.MJD), ncol = ncol(A$analog.dates.MJD))
+  
+  for (i in 1:length(A$target.dates.MJD)){
+    targ.date <- A$target.dates.MJD[i]
+    targ.nb.analog <- target.a.nb[i]
+    
+    analog.a.nb[A$analog.dates.MJD==targ.date] <- targ.nb.analog
+  }
+  
+  return(analog.a.nb)
 }

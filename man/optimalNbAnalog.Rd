@@ -10,7 +10,7 @@ optimalNbAnalog(crps.matrix)
 \item{crps.matrix}{Results of atmoswing::crpsNbAnalogs.}
 }
 \value{
-Vector of the optimal number of analogues for each target date..
+Vector of the optimal number of analogues for each target date.
 }
 \description{
 Identifies the optimal number of analogues on the crps matrix resulting from
@@ -18,9 +18,9 @@ atmoswing::crpsNbAnalogs.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optimizer-outputs/1/results', 1, 'validation')
-res.crps <- atmoswing::crpsNbAnalogs(data, 9)
-res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed, 9)
+data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+res.crps <- atmoswing::crpsNbAnalogs(data)
+res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
 }
 
 }

@@ -1,7 +1,7 @@
 library(atmoswing)
 context("Optimal nb analogues")
 
-test_that("Optimal nb of analogues number is correct", {
+test_that("Optimal nb of analogues is correct", {
   A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
                                  1, 'calibration')
   

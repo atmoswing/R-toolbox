@@ -20,7 +20,7 @@ target period.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optimizer-outputs/1/results', 1, 'validation')
+data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
 res <- atmoswing::crpsNbAnalogs(data, 9)
 }
 

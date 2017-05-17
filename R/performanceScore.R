@@ -59,4 +59,53 @@ crps <- function(x, x0, a=0.44, b=0.12) {
   }
   
   return(res)
-} 
+}
+
+#' Get the contribution to the CRPS per predictand classes.
+#'
+#' Get the contribution to the CRPS for different predictand classes.
+#'
+#' @param crps.vect A vector of the CRPS value for every target day.
+#' @param obs.vect A vector of the observed value (same length as crps.vect).
+#'
+#' @return Contribution to the CRPS (%).
+#'
+#' @examples
+#' \dontrun{
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' crps.matrix <- atmoswing::crpsNbAnalogs(data)
+#' res <- atmoswing::crpsContribClasses(crps.matrix$crps[, 30], data$target.values.raw)
+#' barplot(res$labels)
+#' title('Contribution to the CRPS (not cumulative)')
+#' }
+#' 
+#' @export
+#' 
+crpsContribClasses <- function(crps.vect, obs.vect) {
+  
+  contrib <- matrix(NA, ncol = 7)
+  
+  contrib[1] <- sum(crps.vect[obs.vect == 0])
+  contrib[2] <- sum(crps.vect[obs.vect > 0
+                              & obs.vect <= stats::quantile(obs.vect, probs = 0.8)])
+  contrib[3] <- sum(crps.vect[obs.vect > stats::quantile(obs.vect, probs = 0.8)
+                              & obs.vect <= stats::quantile(obs.vect, probs = 0.9)])
+  contrib[4] <- sum(crps.vect[obs.vect > stats::quantile(obs.vect, probs = 0.9)
+                              & obs.vect <= stats::quantile(obs.vect, probs = 0.95)])
+  contrib[5] <- sum(crps.vect[obs.vect > stats::quantile(obs.vect, probs = 0.95)
+                              & obs.vect <= stats::quantile(obs.vect, probs = 0.97)])
+  contrib[6] <- sum(crps.vect[obs.vect > stats::quantile(obs.vect, probs = 0.97)
+                              & obs.vect <= stats::quantile(obs.vect, probs = 0.99)])
+  contrib[7] <- sum(crps.vect[obs.vect > stats::quantile(obs.vect, probs = 0.99)])
+  
+  contrib <- 100 * contrib / sum(contrib)
+  
+  labels <- c("P = 0", "0 < P <= q.8", "q.8 < P <= q.9", "q.9 < P <= q.95",
+              "q.95 < P <= q.97", "q.97 < P <= q.99", "P > q.99")
+  
+  # Pack results
+  res <- list(contrib = contrib,
+              labels = labels)
+                             
+  return(res)
+}
