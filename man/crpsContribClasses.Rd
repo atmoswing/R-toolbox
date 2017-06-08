@@ -20,10 +20,10 @@ Get the contribution to the CRPS for different predictand classes.
 \examples{
 \dontrun{
 data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
-crps.matrix <- atmoswing::crpsNbAnalogs(data)
-res <- atmoswing::crpsContribClasses(crps.matrix$crps[, 30], data$target.values.raw)
-barplot(res$labels)
-title('Contribution to the CRPS (not cumulative)')
+crps.vect <- atmoswing::crpsVector(data, 10)
+res <- atmoswing::crpsContribClasses(crps.vect, data$target.values.raw)
+barplot(res$contrib, names.arg=res$labels, las=2, cex.names=0.7)
+title('Contribution (\%) to the CRPS (not cumulative)')
 }
 
 }

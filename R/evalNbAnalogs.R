@@ -47,7 +47,7 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
               crps.smoothed = crps.nb.analogs.smoothed)
   
   return(res)
-} 
+}
 
 
 #' Identifies the optimal number of analogues on the crps matrix.
