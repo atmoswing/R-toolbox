@@ -8,6 +8,7 @@
 #' @param x0 Observed value.
 #' @param a,b Constants that have a law-dependent optimum from which the samples 
 #'   are derived.
+#' @param w Weight for every analogue day
 #'
 #' @return Value of the CRPS score.
 #'
@@ -18,12 +19,23 @@
 #' 
 #' @export
 #' 
-crps <- function(x, x0, a=0.44, b=0.12) {
+crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
   
-  x.s <- sort(x)
   n <- length(x)
-  r <- 1:n
-  Fx <- (r - a) / (n + b)
+  
+  if (is.na(w)) {
+    x.s <- sort(x)
+    r <- 1:n
+    Fx <- (r - a) / (n + b)
+  } else {
+    assert_that(length(Fx) == n)
+    sorted <- sort.int(x, index.return=TRUE)
+    x.s <- sorted$x
+    w <- w[sorted$ix]
+    fx <- w / sum(w)
+    Fx <- cumsum(fx) - fx/2
+  }
+  
   res <- 0
   
   # Add rectangle on right side if observed value is on the right
@@ -69,7 +81,7 @@ crps <- function(x, x0, a=0.44, b=0.12) {
 #' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
 #' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
 #'
-#' @return Matrices with CRPS scores for an increasing number of analogues.
+#' @return Vector of the CRPS value for every day of the target period.
 #'
 #' @examples
 #' \dontrun{
@@ -101,6 +113,54 @@ crpsVector <- function(A, nb.analogs = 0) {
     crpsPerRow,
     split(A$analog.values.norm, row(A$analog.values.norm)),
     A$target.values.norm,
+    nb.analogs
+  ))
+  
+  return(crps.vect)
+}
+
+#' Process the CRPS weighted by the analogy criteria for the target period..
+#'
+#' Process the CRPS weighted by the analogy criteria for a given number of 
+#' analogues for every day of the target period.
+#'
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
+#'
+#' @return Vector of the CRPS value for every day of the target period.
+#'
+#' @examples
+#' \dontrun{
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' res <- atmoswing::crpsVector(data, 30)
+#' }
+#' 
+#' @export
+#' 
+crpsVectorWeightedByCriteria <- function(A, nb.analogs = 0) {
+  
+  # Check provided number of analogues
+  if (nb.analogs == 0) {
+    nb.analogs <- ncol(A$analog.values.norm)
+  } else {
+    if (nb.analogs > ncol(A$analog.values.norm)) {
+      nb.analogs <- ncol(A$analog.values.norm)
+      warning("The provided number of analogues is higher than the number of analogues available.")
+    }
+  }
+  
+  # Calculation on a single row
+  crpsPerRow <- function(analog.values, target.value, analog.criteria, nb.analogs) {
+    weights <- abs(analog.criteria[1:nb.analogs] - analog.criteria[nb.analogs])
+    return (atmoswing::crps(analog.values[1:nb.analogs], target.value, a=0.44, b=0.12, w=weights))
+  }
+  
+  # Apply on the whole matrix
+  crps.vect <- t(mapply(
+    crpsPerRow,
+    split(A$analog.values.norm, row(A$analog.values.norm)),
+    A$target.values.norm,
+    split(A$analog.criteria, row(A$analog.criteria)),
     nb.analogs
   ))
   

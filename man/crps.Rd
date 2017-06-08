@@ -4,7 +4,7 @@
 \alias{crps}
 \title{Continuous ranked probability score.}
 \usage{
-crps(x, x0, a = 0.44, b = 0.12)
+crps(x, x0, a = 0.44, b = 0.12, w = NA)
 }
 \arguments{
 \item{x}{Vector of length n (number of members / analogues).}
@@ -13,6 +13,8 @@ crps(x, x0, a = 0.44, b = 0.12)
 
 \item{a, b}{Constants that have a law-dependent optimum from which the samples 
 are derived.}
+
+\item{w}{Weight for every analogue day}
 }
 \value{
 Value of the CRPS score.
