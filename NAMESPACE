@@ -3,6 +3,7 @@
 export(crps)
 export(crpsContribClasses)
 export(crpsNbAnalogs)
+export(crpsVector)
 export(optimalNbAnalog)
 export(optimalNbAnalogOfAnalogs)
 export(parseNcOutputs)

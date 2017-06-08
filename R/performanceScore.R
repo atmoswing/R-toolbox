@@ -61,6 +61,52 @@ crps <- function(x, x0, a=0.44, b=0.12) {
   return(res)
 }
 
+#' Process the CRPS for a given number of analogues.
+#'
+#' Process the CRPS for a given number of analogues for every day of the 
+#' target period.
+#'
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
+#'
+#' @return Matrices with CRPS scores for an increasing number of analogues.
+#'
+#' @examples
+#' \dontrun{
+#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' res <- atmoswing::crpsVector(data, 30)
+#' }
+#' 
+#' @export
+#' 
+crpsVector <- function(A, nb.analogs = 0) {
+  
+  # Check provided number of analogues
+  if (nb.analogs == 0) {
+    nb.analogs <- ncol(A$analog.values.norm)
+  } else {
+    if (nb.analogs > ncol(A$analog.values.norm)) {
+      nb.analogs <- ncol(A$analog.values.norm)
+      warning("The provided number of analogues is higher than the number of analogues available.")
+    }
+  }
+  
+  # Calculation on a single row
+  crpsPerRow <- function(analog.values, target.value, nb.analogs) {
+    return (atmoswing::crps(analog.values[1:nb.analogs], target.value))
+  }
+  
+  # Apply on the whole matrix
+  crps.vect <- t(mapply(
+    crpsPerRow,
+    split(A$analog.values.norm, row(A$analog.values.norm)),
+    A$target.values.norm,
+    nb.analogs
+  ))
+  
+  return(crps.vect)
+}
+
 #' Get the contribution to the CRPS per predictand classes.
 #'
 #' Get the contribution to the CRPS for different predictand classes.
