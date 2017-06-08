@@ -23,12 +23,12 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
   
   n <- length(x)
   
-  if (is.na(w)) {
+  if (length(w) == 1) {
     x.s <- sort(x)
     r <- 1:n
     Fx <- (r - a) / (n + b)
   } else {
-    assert_that(length(Fx) == n)
+    assert_that(length(w) == n)
     sorted <- sort.int(x, index.return=TRUE)
     x.s <- sorted$x
     w <- w[sorted$ix]
