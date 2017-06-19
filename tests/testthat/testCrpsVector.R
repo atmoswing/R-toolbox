@@ -2,8 +2,8 @@ library(atmoswing)
 context("CRPS vector")
 
 test_that("CRPS vector is correct on all analogues", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'calibration')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'calibration')
   
   res <- atmoswing::crpsVector(A)
   val <- unname(res[14])
@@ -15,8 +15,8 @@ test_that("CRPS vector is correct on all analogues", {
 })
 
 test_that("CRPS vector is correct on 5 analogues", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'calibration')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'calibration')
   
   res <- atmoswing::crpsVector(A, 5)
   val <- unname(res[14])
@@ -27,8 +27,8 @@ test_that("CRPS vector is correct on 5 analogues", {
 })
 
 test_that("CRPS vector is correct on too many analogues", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'calibration')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'calibration')
 
   res <- atmoswing::crpsVector(A, 20)
   val <- unname(res[14])

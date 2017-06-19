@@ -3,14 +3,14 @@
 #' Process the CRPS for an increasing number of analogues for every day of the 
 #' target period.
 #'
-#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
 #' @param filter.size Length of "running window", has to be odd.
 #'
 #' @return Matrices with CRPS scores for an increasing number of analogues.
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 #' res <- atmoswing::crpsNbAnalogs(data, 9)
 #' }
 #' 
@@ -61,7 +61,7 @@ crpsNbAnalogs <- function(A, filter.size = 9) {
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 #' res.crps <- atmoswing::crpsNbAnalogs(data)
 #' res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
 #' }
@@ -89,14 +89,14 @@ optimalNbAnalog <- function(crps.matrix) {
 #' works on the calibration period, where the optimal number of analogues can
 #' be assessed for the non independent dates.
 #'
-#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
 #' @param target.a.nb Results of atmoswing::optimalNbAnalog
 #'
 #' @return Matrix of the optimal number of analogues for each analogue date.
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 #' res.crps <- atmoswing::crpsNbAnalogs(data)
 #' target.a.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
 #' res <- atmoswing::optimalNbAnalogOfAnalogs(data, target.a.nb$nb.min.med)

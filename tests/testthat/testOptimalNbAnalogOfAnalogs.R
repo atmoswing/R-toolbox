@@ -2,8 +2,8 @@ library(atmoswing)
 context("Optimal nb analogues of analogues")
 
 test_that("Optimal nb of analogues of analogues is correct", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'calibration')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'calibration')
   
   crps.nb.analogs <- atmoswing::crpsNbAnalogs(A, 5)
   

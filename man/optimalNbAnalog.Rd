@@ -18,7 +18,7 @@ atmoswing::crpsNbAnalogs.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 res.crps <- atmoswing::crpsNbAnalogs(data)
 res.nb <- atmoswing::optimalNbAnalog(res.crps$crps.smoothed)
 }

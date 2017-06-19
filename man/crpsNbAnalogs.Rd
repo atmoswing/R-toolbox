@@ -7,7 +7,7 @@
 crpsNbAnalogs(A, filter.size = 9)
 }
 \arguments{
-\item{A}{Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.}
+\item{A}{Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.}
 
 \item{filter.size}{Length of "running window", has to be odd.}
 }
@@ -20,7 +20,7 @@ target period.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 res <- atmoswing::crpsNbAnalogs(data, 9)
 }
 

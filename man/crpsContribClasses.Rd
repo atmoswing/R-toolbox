@@ -19,7 +19,7 @@ Get the contribution to the CRPS for different predictand classes.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 crps.vect <- atmoswing::crpsVector(data, 10)
 res <- atmoswing::crpsContribClasses(crps.vect, data$target.values.raw)
 barplot(res$contrib, names.arg=res$labels, las=2, cex.names=0.7)

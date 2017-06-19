@@ -2,8 +2,8 @@ library(atmoswing)
 context("Parsing outputs")
 
 test_that("NetCDF outputs are correctly parsed for 1 level of analogy, calibration", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'calibration')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'calibration')
   
   expect_equal(A$analog.dates.MJD[1,1], 53777.0)
   expect_equal(A$analog.dates.MJD[19,1], 48960.0)
@@ -34,8 +34,8 @@ test_that("NetCDF outputs are correctly parsed for 1 level of analogy, calibrati
 })
 
 test_that("NetCDF outputs are correctly parsed for 1 level of analogy, validation", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '1', 'results'),
-                                 1, 'validation')
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                    1, 'validation')
   
   expect_equal(A$analog.dates.MJD[1,1], 49666.0)
   expect_equal(A$analog.dates.MJD[19,1], 54466.0)
@@ -66,8 +66,8 @@ test_that("NetCDF outputs are correctly parsed for 1 level of analogy, validatio
 })
 
 test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, calibration", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '2', 'results'),
-                                 1, 'calibration', 2)
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '2', 'results'),
+                                    1, 'calibration', 2)
   
   expect_equal(A$analog.dates.MJD[1,1], 46076.0)
   expect_equal(A$analog.dates.MJD[19,1], 45320.0)
@@ -98,8 +98,8 @@ test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, cal
 })
 
 test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, validation", {
-  A <- atmoswing::parseNcOutputs(file.path('test_files', 'optim', '2', 'results'),
-                                 1, 'validation', 2)
+  A <- atmoswing::parseAllNcOutputs(file.path('test_files', 'optim', '2', 'results'),
+                                    1, 'validation', 2)
   
   expect_equal(A$analog.dates.MJD[1,1], 51216.0)
   expect_equal(A$analog.dates.MJD[19,1], 50821.0)
@@ -125,5 +125,20 @@ test_that("NetCDF outputs are correctly parsed for the 2nd level of analogy, val
   expect_equal(A$target.values.raw[8], 2.7, tolerance = .0001)
   
   expect_equal(A$predict.score[7], 0.7440, tolerance = .0001)
+  
+})
+
+test_that("NetCDF outputs are correctly parsed only for the scores", {
+  A <- atmoswing::parseScoresNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                       1, 'calibration')
+  
+  expect_equal(A$target.dates.MJD[6], 54837.0)
+  expect_equal(A$target.dates.UTC[6], as.Date('2009-01-06'))
+  
+  expect_equal(A$target.values.norm[19], 0.3286, tolerance = .0001)
+  
+  expect_equal(A$target.values.raw[19], 20.4, tolerance = .0001)
+  
+  expect_equal(A$predict.score[7], 0.9594, tolerance = .0001)
   
 })

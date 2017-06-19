@@ -7,7 +7,7 @@
 crpsVector(A, nb.analogs = 0)
 }
 \arguments{
-\item{A}{Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.}
+\item{A}{Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.}
 
 \item{nb.analogs}{Number of analogs to consider (all of them if ignored or 0)}
 }
@@ -20,7 +20,7 @@ target period.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 res <- atmoswing::crpsVector(data, 30)
 }
 
