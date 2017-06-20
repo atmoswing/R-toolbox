@@ -81,6 +81,8 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
 #'
 #' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
 #' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
+#' @param a,b Constants that have a law-dependent optimum from which the samples 
+#'   are derived.
 #'
 #' @return Vector of the CRPS value for every day of the target period.
 #'
@@ -92,7 +94,7 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
 #' 
 #' @export
 #' 
-crpsVector <- function(A, nb.analogs = 0) {
+crpsVector <- function(A, nb.analogs = 0, a=0.44, b=0.12) {
   
   # Check provided number of analogues
   if (nb.analogs == 0) {
@@ -105,8 +107,8 @@ crpsVector <- function(A, nb.analogs = 0) {
   }
   
   # Calculation on a single row
-  crpsPerRow <- function(analog.values, target.value, nb.analogs) {
-    return (atmoswing::crps(analog.values[1:nb.analogs], target.value))
+  crpsPerRow <- function(analog.values, target.value, nb.analogs, a, b) {
+    return (atmoswing::crps(analog.values[1:nb.analogs], target.value, a=a, b=b))
   }
   
   # Apply on the whole matrix
@@ -114,7 +116,8 @@ crpsVector <- function(A, nb.analogs = 0) {
     crpsPerRow,
     split(A$analog.values.norm, row(A$analog.values.norm)),
     A$target.values.norm,
-    nb.analogs
+    nb.analogs,
+    a, b
   ))
   
   return(crps.vect)
@@ -128,6 +131,8 @@ crpsVector <- function(A, nb.analogs = 0) {
 #' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
 #' @param scale Importance given to the weights (0 to 1)
 #' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
+#' @param a,b Constants that have a law-dependent optimum from which the samples 
+#'   are derived.
 #'
 #' @return Vector of the CRPS value for every day of the target period.
 #'

@@ -4,12 +4,15 @@
 \alias{crpsVector}
 \title{Process the CRPS for a given number of analogues.}
 \usage{
-crpsVector(A, nb.analogs = 0)
+crpsVector(A, nb.analogs = 0, a = 0.44, b = 0.12)
 }
 \arguments{
 \item{A}{Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.}
 
 \item{nb.analogs}{Number of analogs to consider (all of them if ignored or 0)}
+
+\item{a, b}{Constants that have a law-dependent optimum from which the samples 
+are derived.}
 }
 \value{
 Vector of the CRPS value for every day of the target period.

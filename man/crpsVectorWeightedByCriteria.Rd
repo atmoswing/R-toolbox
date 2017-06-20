@@ -13,6 +13,9 @@ crpsVectorWeightedByCriteria(A, scale = 1, nb.analogs = 0, a = 0.44,
 \item{scale}{Importance given to the weights (0 to 1)}
 
 \item{nb.analogs}{Number of analogs to consider (all of them if ignored or 0)}
+
+\item{a, b}{Constants that have a law-dependent optimum from which the samples 
+are derived.}
 }
 \value{
 Vector of the CRPS value for every day of the target period.
