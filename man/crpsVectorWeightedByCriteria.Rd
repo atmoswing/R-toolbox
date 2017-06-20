@@ -4,10 +4,13 @@
 \alias{crpsVectorWeightedByCriteria}
 \title{Process the CRPS weighted by the analogy criteria for the target period..}
 \usage{
-crpsVectorWeightedByCriteria(A, nb.analogs = 0)
+crpsVectorWeightedByCriteria(A, scale = 1, nb.analogs = 0, a = 0.44,
+  b = 0.12)
 }
 \arguments{
-\item{A}{Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.}
+\item{A}{Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.}
+
+\item{scale}{Importance given to the weights (0 to 1)}
 
 \item{nb.analogs}{Number of analogs to consider (all of them if ignored or 0)}
 }
@@ -20,8 +23,8 @@ analogues for every day of the target period.
 }
 \examples{
 \dontrun{
-data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
-res <- atmoswing::crpsVector(data, 30)
+data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
+res <- atmoswing::crpsVectorWeightedByCriteria(data, 1, 30)
 }
 
 }

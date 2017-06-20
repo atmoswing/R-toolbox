@@ -28,12 +28,13 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
     r <- 1:n
     Fx <- (r - a) / (n + b)
   } else {
-    assert_that(length(w) == n)
+    assertthat::assert_that(length(w) == n)
     sorted <- sort.int(x, index.return=TRUE)
     x.s <- sorted$x
     w <- w[sorted$ix]
     fx <- w / sum(w)
-    Fx <- cumsum(fx) - fx/2
+    #fx <- fx*((n-a)/(n+b)-(1-a)/(n+b))
+    Fx <- cumsum(fx)# - fx/2
   }
   
   res <- 0
@@ -78,14 +79,14 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
 #' Process the CRPS for a given number of analogues for every day of the 
 #' target period.
 #'
-#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
 #' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
 #'
 #' @return Vector of the CRPS value for every day of the target period.
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 #' res <- atmoswing::crpsVector(data, 30)
 #' }
 #' 
@@ -124,20 +125,23 @@ crpsVector <- function(A, nb.analogs = 0) {
 #' Process the CRPS weighted by the analogy criteria for a given number of 
 #' analogues for every day of the target period.
 #'
-#' @param A Results of AtmoSwing as parsed by atmoswing::parseNcOutputs.
+#' @param A Results of AtmoSwing as parsed by atmoswing::parseAllNcOutputs.
+#' @param scale Importance given to the weights (0 to 1)
 #' @param nb.analogs Number of analogs to consider (all of them if ignored or 0)
 #'
 #' @return Vector of the CRPS value for every day of the target period.
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
-#' res <- atmoswing::crpsVector(data, 30)
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
+#' res <- atmoswing::crpsVectorWeightedByCriteria(data, 1, 30)
 #' }
 #' 
 #' @export
 #' 
-crpsVectorWeightedByCriteria <- function(A, nb.analogs = 0) {
+crpsVectorWeightedByCriteria <- function(A, scale = 1, nb.analogs = 0, a=0.44, b=0.12) {
+  
+  assertthat::assert_that(scale >= 0 & scale <= 1)
   
   # Check provided number of analogues
   if (nb.analogs == 0) {
@@ -152,7 +156,8 @@ crpsVectorWeightedByCriteria <- function(A, nb.analogs = 0) {
   # Calculation on a single row
   crpsPerRow <- function(analog.values, target.value, analog.criteria, nb.analogs) {
     weights <- abs(analog.criteria[1:nb.analogs] - analog.criteria[nb.analogs])
-    return (atmoswing::crps(analog.values[1:nb.analogs], target.value, a=0.44, b=0.12, w=weights))
+    weights <- scale*weights/sum(weights) + (1-scale)*1/length(weights)
+    return (atmoswing::crps(analog.values[1:nb.analogs], target.value, a=a, b=b, w=weights))
   }
   
   # Apply on the whole matrix
@@ -178,7 +183,7 @@ crpsVectorWeightedByCriteria <- function(A, nb.analogs = 0) {
 #'
 #' @examples
 #' \dontrun{
-#' data <- atmoswing::parseNcOutputs('optim/1/results', 1, 'validation')
+#' data <- atmoswing::parseAllNcOutputs('optim/1/results', 1, 'validation')
 #' crps.vect <- atmoswing::crpsVector(data, 10)
 #' res <- atmoswing::crpsContribClasses(crps.vect, data$target.values.raw)
 #' barplot(res$contrib, names.arg=res$labels, las=2, cex.names=0.7)
