@@ -34,7 +34,6 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
     w <- w[sorted$ix]
     fx <- w / sum(w)
     fx.cum <- cumsum(fx)
-    assertthat::assert_that(fx.cum[n] == 1)
     fx.cum.sc <- fx.cum * n
     r.w <- fx.cum.sc + (1-fx.cum.sc[1]) * (n-r) / (n-1)
     assertthat::assert_that(abs(r.w[1]-1)<0.00001, msg = paste("r.w[1] =", r.w[1]))
