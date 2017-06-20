@@ -22,10 +22,10 @@
 crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
   
   n <- length(x)
+  r <- 1:n
   
   if (length(w) == 1) {
     x.s <- sort(x)
-    r <- 1:n
     Fx <- (r - a) / (n + b)
   } else {
     assertthat::assert_that(length(w) == n)
@@ -33,8 +33,13 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
     x.s <- sorted$x
     w <- w[sorted$ix]
     fx <- w / sum(w)
-    #fx <- fx*((n-a)/(n+b)-(1-a)/(n+b))
-    Fx <- cumsum(fx)# - fx/2
+    fx.cum <- cumsum(fx)
+    assertthat::assert_that(fx.cum[n] == 1)
+    fx.cum.sc <- fx.cum * n
+    r.w <- fx.cum.sc + (1-fx.cum.sc[1]) * (n-r) / (n-1)
+    assertthat::assert_that(r.w[1] == 1)
+    assertthat::assert_that(r.w[n] == n)
+    Fx <- (r.w - a) / (n + b)
   }
   
   res <- 0
