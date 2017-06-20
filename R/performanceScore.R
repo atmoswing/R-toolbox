@@ -37,8 +37,8 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
     assertthat::assert_that(fx.cum[n] == 1)
     fx.cum.sc <- fx.cum * n
     r.w <- fx.cum.sc + (1-fx.cum.sc[1]) * (n-r) / (n-1)
-    assertthat::assert_that(r.w[1] == 1, msg = paste("r.w[1] =", r.w[1]))
-    assertthat::assert_that(r.w[n] == n)
+    assertthat::assert_that(abs(r.w[1]-1)<0.00001, msg = paste("r.w[1] =", r.w[1]))
+    assertthat::assert_that(abs(r.w[n]-n)<0.00001)
     Fx <- (r.w - a) / (n + b)
   }
   
