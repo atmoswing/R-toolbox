@@ -142,3 +142,29 @@ test_that("NetCDF outputs are correctly parsed only for the scores", {
   expect_equal(A$predict.score[7], 0.9594, tolerance = .0001)
   
 })
+
+test_that("NetCDF outputs are correctly parsed only for the dates", {
+  A <- atmoswing::parseDatesNcOutputs(file.path('test_files', 'optim', '1', 'results'),
+                                      1, 'calibration')
+  
+  expect_equal(A$analog.dates.MJD[1,1], 53777.0)
+  expect_equal(A$analog.dates.MJD[19,1], 48960.0)
+  expect_equal(A$analog.dates.MJD[23,5], 47875.0)
+  
+  expect_equal(A$target.dates.MJD[6], 54837.0)
+  expect_equal(A$target.dates.UTC[6], as.Date('2009-01-06'))
+  
+})
+
+test_that("NetCDF outputs are correctly parsed only for the dates on the 2nd level", {
+  A <- atmoswing::parseDatesNcOutputs(file.path('test_files', 'optim', '2', 'results'),
+                                      1, 'validation', 2)
+  
+  expect_equal(A$analog.dates.MJD[1,1], 51216.0)
+  expect_equal(A$analog.dates.MJD[19,1], 50821.0)
+  expect_equal(A$analog.dates.MJD[23,5], 49703.0)
+  
+  expect_equal(A$target.dates.MJD[6], 55202.0)
+  expect_equal(A$target.dates.UTC[6], as.Date('2010-01-06'))
+  
+})
