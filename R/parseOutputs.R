@@ -159,7 +159,10 @@ parseValuesNcOutputs <- function(directory, station.id, period, level = 1) {
   # Extract data
   AM <- list(
     analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
-    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross')
+    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
+    target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
+    target.dates.UTC = as.Date(astroFns::dmjd2ut(
+      ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d')
   )
   
   # Close all files
