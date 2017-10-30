@@ -119,6 +119,55 @@ parseDatesNcOutputs <- function(directory, station.id, period, level = 1) {
   return(AM)
 } 
 
+#' Parse NetCDF files resulting from AtmoSwing optimizer.
+#'
+#' Extract results (for both analogues and the target situations: predictand 
+#' values) from the NetCDF files resulting from AtmoSwing optimizer.
+#'
+#' @param directory Directory containing the outputs from AtmoSwing (containing 
+#'   the "calibration" or "validation" directories).
+#' @param station.id ID of the station time series.
+#' @param period Either "calibration" or "validation".
+#' @param level Analogy level.
+#'
+#' @return Results of the analogue method.
+#'
+#' @examples
+#' \dontrun{
+#' data <- atmoswing::parseValuesNcOutputs('optimizer-outputs/1/results', 1, 'validation')
+#' }
+#' 
+#' @export
+#' 
+parseValuesNcOutputs <- function(directory, station.id, period, level = 1) {
+  
+  assertthat::assert_that((period=='calibration' || period=='validation'), 
+                          msg = 'period must be "calibration" or "validation"')
+  assertthat::assert_that(assertthat::is.dir(directory), 
+                          msg = paste(directory, 'is not a directory (wd:', 
+                                      getwd(), ')'))
+  
+  # Look for the files
+  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+                       station.id, '_step_', level-1, '.nc', sep='')
+  assertthat::assert_that(file.exists(path.values), 
+                          msg = paste(path.values, 'not found'))
+  
+  # Open all files
+  AV.nc = ncdf4::nc_open(path.values)
+  
+  # Extract data
+  AM <- list(
+    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
+    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross')
+  )
+  
+  # Close all files
+  ncdf4::nc_close(AV.nc)
+  
+  return(AM)
+} 
+
 #' Parse NetCDF score files resulting from AtmoSwing optimizer.
 #'
 #' Extract results (for the target situations: predictand values, prediction 
