@@ -28,16 +28,30 @@ parseAllNcOutputs <- function(directory, station.id, period, level = 1) {
                                       getwd(), ')'))
   
   # Look for the files
-  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+  path.values <- paste(directory, '/', period, '/AnalogValues_id_', 
                        station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.values)) {
+    path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+                         station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.values), 
                           msg = paste(path.values, 'not found'))
-  path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', 
+  
+  path.dates <- paste(directory, '/', period, '/AnalogDates_id_', 
                       station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.dates)) {
+    path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', 
+                        station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.dates), 
                           msg = paste(path.dates, 'not found'))
-  path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', 
+  
+  path.scores <- paste(directory, '/', period, '/Scores_id_', 
                        station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.scores)) {
+    path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', 
+                         station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.scores), 
                           msg = paste(path.scores, 'not found'))
   
@@ -97,8 +111,12 @@ parseDatesNcOutputs <- function(directory, station.id, period, level = 1) {
                                       getwd(), ')'))
   
   # Look for the files
-  path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', 
+  path.dates <- paste(directory, '/', period, '/AnalogDates_id_', 
                       station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.dates)) {
+    path.dates <- paste(directory, '/', period, '/AnalogsDates_id_', 
+                        station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.dates), 
                           msg = paste(path.dates, 'not found'))
   
@@ -148,8 +166,12 @@ parseValuesNcOutputs <- function(directory, station.id, period, level = 1) {
                                       getwd(), ')'))
   
   # Look for the files
-  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+  path.values <- paste(directory, '/', period, '/AnalogValues_id_', 
                        station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.values)) {
+    path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+                         station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.values), 
                           msg = paste(path.values, 'not found'))
   
@@ -200,12 +222,21 @@ parseScoresNcOutputs <- function(directory, station.id, period, level = 1) {
                                       getwd(), ')'))
   
   # Look for the files
-  path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+  path.values <- paste(directory, '/', period, '/AnalogValues_id_', 
                        station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.values)) {
+    path.values <- paste(directory, '/', period, '/AnalogsValues_id_', 
+                         station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.values), 
                           msg = paste(path.values, 'not found'))
-  path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', 
+  
+  path.scores <- paste(directory, '/', period, '/Scores_id_', 
                        station.id, '_step_', level-1, '.nc', sep='')
+  if (!file.exists(path.scores)) {
+    path.scores <- paste(directory, '/', period, '/AnalogsForecastScores_id_', 
+                         station.id, '_step_', level-1, '.nc', sep='')
+  }
   assertthat::assert_that(file.exists(path.scores), 
                           msg = paste(path.scores, 'not found'))
   
