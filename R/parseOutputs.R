@@ -337,11 +337,11 @@ createStationsDataframe <- function(predictandDB) {
   predictandDB.nc <- ncdf4::nc_open(predictandDB)
   
   stations <- data.frame(
-    id = ncvar_get(predictandDB.nc, varid = "station_ids"),
-    x = ncvar_get(predictandDB.nc, varid = "station_x_coords"),
-    y = ncvar_get(predictandDB.nc, varid = "station_y_coords"),
-    h = ncvar_get(predictandDB.nc, varid = "station_heights"),
-    p10 = ncvar_get(predictandDB.nc, varid = "daily_precipitations_for_return_periods")[4,]
+    id = ncdf4::ncvar_get(predictandDB.nc, varid = "station_ids"),
+    x = ncdf4::ncvar_get(predictandDB.nc, varid = "station_x_coords"),
+    y = ncdf4::ncvar_get(predictandDB.nc, varid = "station_y_coords"),
+    h = ncdf4::ncvar_get(predictandDB.nc, varid = "station_heights"),
+    p10 = ncdf4::ncvar_get(predictandDB.nc, varid = "daily_precipitations_for_return_periods")[4,]
   )
   
   ncdf4::nc_close(predictandDB.nc)
