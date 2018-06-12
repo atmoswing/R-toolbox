@@ -321,6 +321,8 @@ parseScoresNcOutputs <- function(directory, station.id, period, level = 1) {
 #' Build an empty dataframe to store the stations properties.
 #'
 #'
+#' @param predictandDB Path to the predictand DB.
+#'
 #' @return The empty dataframe.
 #'
 #' @examples
@@ -330,15 +332,19 @@ parseScoresNcOutputs <- function(directory, station.id, period, level = 1) {
 #' 
 #' @export
 #' 
-createStationsDataframe <- function() {
+createStationsDataframe <- function(predictandDB) {
+  
+  predictandDB.nc <- ncdf4::nc_open(predictandDB)
   
   stations <- data.frame(
-    id = ncvar_get(stationsFile, varid = "station_ids"),
-    x = ncvar_get(stationsFile, varid = "station_x_coords"),
-    y = ncvar_get(stationsFile, varid = "station_y_coords"),
-    h = ncvar_get(stationsFile, varid = "station_heights"),
-    p10 = ncvar_get(stationsFile, varid = "daily_precipitations_for_return_periods")[4,]
+    id = ncvar_get(predictandDB.nc, varid = "station_ids"),
+    x = ncvar_get(predictandDB.nc, varid = "station_x_coords"),
+    y = ncvar_get(predictandDB.nc, varid = "station_y_coords"),
+    h = ncvar_get(predictandDB.nc, varid = "station_heights"),
+    p10 = ncvar_get(predictandDB.nc, varid = "daily_precipitations_for_return_periods")[4,]
   )
+  
+  ncdf4::nc_close(predictandDB.nc)
   
   return(stations)
 } 

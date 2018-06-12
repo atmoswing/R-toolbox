@@ -18,9 +18,9 @@
 #' 
 #' @export
 #' 
-getCrpss <- function(directory, datasets, methods, period) {
+getCrpss <- function(directory, predictandDB, datasets, methods, period) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)
@@ -97,9 +97,9 @@ getCrpss <- function(directory, datasets, methods, period) {
 #' 
 getCrpssThresholds <- function(directory, predictandDB, datasets, methods, period, startYear, endYear) {
   
-  predictandDB.nc <- ncdf4::nc_open(predictandDB)
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
-  stations <- atmoswing::createStationsDataframe()
+  predictandDB.nc <- ncdf4::nc_open(predictandDB)
   
   thresNames <- c("eq0", "sup0", "0.80", "0.90", "0.95", "0.99")
   
@@ -220,6 +220,7 @@ getCrpssThresholds <- function(directory, predictandDB, datasets, methods, perio
 #' Process the correlation coefficient of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param period Either "calibration" or "validation".
@@ -235,9 +236,9 @@ getCrpssThresholds <- function(directory, predictandDB, datasets, methods, perio
 #' 
 #' @export
 #' 
-getCorrel <- function(directory, datasets, methods, period) {
+getCorrel <- function(directory, predictandDB, datasets, methods, period) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)
@@ -303,6 +304,7 @@ getCorrel <- function(directory, datasets, methods, period) {
 #' Process the monthly correlation coefficients of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param period Either "calibration" or "validation".
@@ -318,9 +320,9 @@ getCorrel <- function(directory, datasets, methods, period) {
 #' 
 #' @export
 #' 
-getCorrelMonthly <- function(directory, datasets, methods, period) {
+getCorrelMonthly <- function(directory, predictandDB, datasets, methods, period) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)
@@ -380,6 +382,7 @@ getCorrelMonthly <- function(directory, datasets, methods, period) {
 #' Process the annual correlation coefficients of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param startYear First year of the total period.
@@ -396,9 +399,9 @@ getCorrelMonthly <- function(directory, datasets, methods, period) {
 #' 
 #' @export
 #' 
-getCorrelYearly <- function(directory, datasets, methods, startYear, endYear) {
+getCorrelYearly <- function(directory, predictandDB, datasets, methods, startYear, endYear) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)
@@ -472,6 +475,7 @@ getCorrelYearly <- function(directory, datasets, methods, startYear, endYear) {
 #' Process the inter-annual correlation coefficients of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param startYear First year of the total period.
@@ -488,9 +492,9 @@ getCorrelYearly <- function(directory, datasets, methods, startYear, endYear) {
 #' 
 #' @export
 #' 
-getInterannualCorrel <- function(directory, datasets, methods, startYear, endYear) {
+getInterannualCorrel <- function(directory, predictandDB, datasets, methods, startYear, endYear) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)
@@ -580,6 +584,7 @@ getInterannualCorrel <- function(directory, datasets, methods, startYear, endYea
 #' Process the precipitation annual totals of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param startYear First year of the total period.
@@ -596,9 +601,9 @@ getInterannualCorrel <- function(directory, datasets, methods, startYear, endYea
 #' 
 #' @export
 #' 
-getAnnualTotals <- function(directory, datasets, methods, startYear, endYear) {
+getAnnualTotals <- function(directory, predictandDB, datasets, methods, startYear, endYear) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   totals <- list()
   
@@ -683,6 +688,7 @@ getAnnualTotals <- function(directory, datasets, methods, startYear, endYear) {
 #' Process the precipitation monthly totals of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param startYear First year of the total period.
@@ -699,9 +705,9 @@ getAnnualTotals <- function(directory, datasets, methods, startYear, endYear) {
 #' 
 #' @export
 #' 
-getMonthlyTotals <- function(directory, datasets, methods, startYear, endYear) {
+getMonthlyTotals <- function(directory, predictandDB, datasets, methods, startYear, endYear) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   totals <- list()
   
@@ -793,6 +799,7 @@ getMonthlyTotals <- function(directory, datasets, methods, startYear, endYear) {
 #' Process the bias of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param startYear First year of the total period.
@@ -809,9 +816,9 @@ getMonthlyTotals <- function(directory, datasets, methods, startYear, endYear) {
 #' 
 #' @export
 #' 
-getBias <- function(directory, datasets, methods, startYear, endYear) {
+getBias <- function(directory, predictandDB, datasets, methods, startYear, endYear) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run dirs
   dirs <- list.dirs(c(directory, ""), full.names = TRUE, recursive = TRUE)

@@ -4,10 +4,13 @@
 \alias{getInterannualCorrel}
 \title{Process the inter-annual correlation coefficients}
 \usage{
-getInterannualCorrel(directory, datasets, methods, startYear, endYear)
+getInterannualCorrel(directory, predictandDB, datasets, methods, startYear,
+  endYear)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}
+
+\item{predictandDB}{Path to the predictand DB.}
 
 \item{datasets}{List of datasets (must be used as folder names - e.g. /JRA-55/)}
 

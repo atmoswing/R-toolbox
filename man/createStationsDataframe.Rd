@@ -4,7 +4,10 @@
 \alias{createStationsDataframe}
 \title{Build a dataframe to store results.}
 \usage{
-createStationsDataframe()
+createStationsDataframe(predictandDB)
+}
+\arguments{
+\item{predictandDB}{Path to the predictand DB.}
 }
 \value{
 The empty dataframe.

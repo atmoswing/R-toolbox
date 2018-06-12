@@ -4,7 +4,7 @@
 \alias{getCrpss}
 \title{Process the CRPSS of multiple methods / datasets}
 \usage{
-getCrpss(directory, datasets, methods, period)
+getCrpss(directory, predictandDB, datasets, methods, period)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}

@@ -20,6 +20,7 @@ Imports:
     assertthat,
 	astroFns,
 	ncdf4,
+    SpecsVerification,
 	stats
 Suggests: 
     testthat

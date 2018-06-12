@@ -4,10 +4,12 @@
 \alias{getMonthlyTotals}
 \title{Process the precipitation monthly totals}
 \usage{
-getMonthlyTotals(directory, datasets, methods, startYear, endYear)
+getMonthlyTotals(directory, predictandDB, datasets, methods, startYear, endYear)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}
+
+\item{predictandDB}{Path to the predictand DB.}
 
 \item{datasets}{List of datasets (must be used as folder names - e.g. /JRA-55/)}
 

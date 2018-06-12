@@ -4,10 +4,12 @@
 \alias{getCorrelMonthly}
 \title{Process the monthly correlation coefficients}
 \usage{
-getCorrelMonthly(directory, datasets, methods, period)
+getCorrelMonthly(directory, predictandDB, datasets, methods, period)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}
+
+\item{predictandDB}{Path to the predictand DB.}
 
 \item{datasets}{List of datasets (must be used as folder names - e.g. /JRA-55/)}
 
