@@ -10,3 +10,17 @@ install_github(repo='atmoswing/R-toolbox',dependencies=T)
 library(atmoswing)
 ?atmoswing
 ```
+
+## Development
+
+To generate the docs, do:
+
+```r
+roxygen2::roxygenise()
+```
+
+To start the tests, do:
+
+```r
+devtools::test()
+```
