@@ -43,6 +43,7 @@ reanalysis.colors <- data.frame(
 #'
 #' Get the reference color for a giver reanalysis.
 #'
+#' @param reanalysis The name of the reanalysis.
 #'
 #' @return The hex color code
 #'
@@ -85,6 +86,7 @@ getReanalysisColor <- function(reanalysis) {
 #'
 #' Get the column max value.
 #'
+#' @param data The matrix to extract values from.
 #'
 #' @return The maximum value found in the column
 #'
@@ -102,6 +104,7 @@ colMax <- function(data) sapply(data, max, na.rm = TRUE)
 #'
 #' Get the column min value.
 #'
+#' @param data The matrix to extract values from.
 #'
 #' @return The minimum value found in the column
 #'

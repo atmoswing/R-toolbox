@@ -3,6 +3,7 @@
 #' Process the CRPSS of multiple methods / datasets
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #' @param period Either "calibration" or "validation".
