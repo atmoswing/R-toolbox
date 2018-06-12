@@ -33,7 +33,7 @@ getCrpss <- function(directory, predictandDB, datasets, methods, period) {
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       fieldName <- paste(dataset, "_", method, "_crpss", sep = "")
       stations[fieldName] <- NA
@@ -131,7 +131,7 @@ getCrpssThresholds <- function(directory, predictandDB, datasets, methods, perio
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       for(thresName in thresNames) {
         fieldName <- paste(dataset, "_", method, "_", thresName, sep = "")
@@ -251,7 +251,7 @@ getCorrel <- function(directory, predictandDB, datasets, methods, period) {
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       fieldName <- paste(dataset, "_", method, "_corr_1st", sep = "")
       stations[fieldName] <- NA
@@ -335,7 +335,7 @@ getCorrelMonthly <- function(directory, predictandDB, datasets, methods, period)
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       for(currMonth in 1:12) {
         fieldName <- paste(dataset, "_", method, "_corr_mean_", currMonth, sep = "")
@@ -414,7 +414,7 @@ getCorrelYearly <- function(directory, predictandDB, datasets, methods, startYea
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       for(y in startYear:endYear) {
         fieldName <- paste(dataset, "_", method, "_corr_mean_", y, sep = "")
@@ -507,7 +507,7 @@ getInterannualCorrel <- function(directory, predictandDB, datasets, methods, sta
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       fieldName <- paste(dataset, "_", method, "_corr_1st", sep = "")
       stations[fieldName] <- NA
@@ -618,7 +618,7 @@ getAnnualTotals <- function(directory, predictandDB, datasets, methods, startYea
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       # Parse files
       for (dirPath in dirsSlct) {
@@ -722,7 +722,7 @@ getMonthlyTotals <- function(directory, predictandDB, datasets, methods, startYe
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       # Parse files
       for (dirPath in dirsSlct) {
@@ -831,7 +831,7 @@ getBias <- function(directory, predictandDB, datasets, methods, startYear, endYe
   for (dataset in datasets) {
     dirsSlctDat <- dirs[ grep(paste("/", dataset, "/", sep = ""), dirs) ]
     for (method in methods) {
-      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirs) ]
+      dirsSlct <- dirsSlctDat[ grep(paste("/", method, "/", sep = ""), dirsSlctDat) ]
       
       fieldName <- paste(dataset, "_", method, "_bias_1st", sep = "")
       stations[fieldName] <- NA

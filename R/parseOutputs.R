@@ -383,7 +383,7 @@ parseAllResultsText <- function(directory, datasets, methods) {
   for (dataset in datasets) {
     filesSlctDat <- files[ grep(paste("/", dataset, "/", sep = ""), files) ]
     for (method in methods) {
-      filesSlct <- filesSlctDat[ grep(paste("/", method, "/", sep = ""), files) ]
+      filesSlct <- filesSlctDat[ grep(paste("/", method, "/", sep = ""), filesSlctDat) ]
       fieldNameCalib <- paste(dataset, "_", method, "_calib", sep = "")
       fieldNameValid <- paste(dataset, "_", method, "_valid", sep = "")
       fieldAnb <- paste(dataset, "_", method, "_anb", sep = "")
