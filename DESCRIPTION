@@ -7,7 +7,7 @@ Authors@R: c(person("Pascal", "Horton", email = "pascal.horton@giub.unibe.ch",
                     role = c("aut", "cre")),
              person("Kathrin", "Burkart", role = "ctb"))
 Author: Pascal Developer [aut, cre],
-  Kathrin Developer [aut]
+  Kathrin Developer [ctb]
 Maintainer: Pascal Horton <pascal.horton@giub.unibe.ch>
 Description: R toolbox for the postprocessing of the AtmoSwing (Analog 
     Technique Model for Statistical weather forecastING) results, which
