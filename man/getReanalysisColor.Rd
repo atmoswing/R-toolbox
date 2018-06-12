@@ -6,6 +6,9 @@
 \usage{
 getReanalysisColor(reanalysis)
 }
+\arguments{
+\item{reanalysis}{The name of the reanalysis.}
+}
 \value{
 The hex color code
 }

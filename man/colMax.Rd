@@ -6,6 +6,9 @@
 \usage{
 colMax(data)
 }
+\arguments{
+\item{data}{The matrix to extract values from.}
+}
 \value{
 The maximum value found in the column
 }

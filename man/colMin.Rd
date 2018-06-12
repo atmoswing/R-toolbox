@@ -6,6 +6,9 @@
 \usage{
 colMin(data)
 }
+\arguments{
+\item{data}{The matrix to extract values from.}
+}
 \value{
 The minimum value found in the column
 }
