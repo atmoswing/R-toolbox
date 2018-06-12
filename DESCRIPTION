@@ -5,6 +5,7 @@ Version: 0.5
 Date: 2017-05-09
 Authors@R: c(person("Pascal", "Horton", email = "pascal.horton@giub.unibe.ch", 
                     role = c("aut", "cre")),
+             person("Pascal", Horton", role = "aut"),
              person("Kathrin", "B.", role = "aut"))
 Author: Pascal Developer [aut, cre],
   Kathrin Developer [aut]

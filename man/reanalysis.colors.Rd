@@ -12,7 +12,12 @@ reanalysis.colors
 The colors dataframe.
 }
 \description{
-Build a dataframe with the predefined color per reanalysis:
+Build a dataframe with the predefined color per reanalysis based on "The 
+S-RIP colour definitions for reanalysis datasets" (Updated on 11 July 2017, 
+for the S-RIP Full Report 2018)
+https://s-rip.ees.hokudai.ac.jp/mediawiki/index.php/Notes_for_Authors
+}
+\note{
 The S-RIP colour definitions for reanalysis datasets (Updated on 11 July 2017, for the S-RIP Full Report 2018)
 https://s-rip.ees.hokudai.ac.jp/mediawiki/index.php/Notes_for_Authors
 Reanalyses	R, G, B	Hexadecimal	Notes

@@ -16,12 +16,3 @@ Useful links:
 }
 
 }
-\author{
-\strong{Maintainer}: Pascal Horton \email{pascal.horton@giub.unibe.ch}
-
-Authors:
-\itemize{
-  \item Kathrin B.
-}
-
-}

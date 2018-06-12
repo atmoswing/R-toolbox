@@ -70,6 +70,7 @@ parseAllNcOutputs <- function(directory, station.id, period, level = 1) {
   return(AM)
 } 
 
+
 #' Parse NetCDF files resulting from AtmoSwing optimizer.
 #'
 #' Extract results (for both analogues and the target situations: dates) from 
@@ -121,6 +122,7 @@ parseDatesNcOutputs <- function(directory, station.id, period, level = 1) {
   return(AM)
 } 
 
+
 #' Parse NetCDF files resulting from AtmoSwing optimizer.
 #'
 #' Extract results (for both analogues and the target situations: dates) from 
@@ -158,6 +160,7 @@ parseDatesNcFile <- function(filePath) {
   
   return(AM)
 } 
+
 
 #' Parse NetCDF files resulting from AtmoSwing optimizer.
 #'
@@ -211,6 +214,7 @@ parseValuesNcOutputs <- function(directory, station.id, period, level = 1) {
   return(AM)
 } 
 
+
 #' Parse NetCDF files resulting from AtmoSwing optimizer.
 #'
 #' Extract results (for both analogues and the target situations: predictand 
@@ -249,6 +253,7 @@ parseValuesNcFile <- function(filePath) {
   
   return(AM)
 } 
+
 
 #' Parse NetCDF score files resulting from AtmoSwing optimizer.
 #'
@@ -310,6 +315,7 @@ parseScoresNcOutputs <- function(directory, station.id, period, level = 1) {
   return(AM)
 } 
 
+
 #' Build a dataframe to store results.
 #'
 #' Build an empty dataframe to store the stations properties.
@@ -336,6 +342,7 @@ createStationsDataframe <- function() {
   
   return(stations)
 } 
+
 
 #' Parse parameters resulting from AtmoSwing optimizer.
 #'

@@ -78,6 +78,7 @@ crps <- function(x, x0, a=0.44, b=0.12, w=NA) {
   return(res)
 }
 
+
 #' Process the CRPS for a given number of analogues.
 #'
 #' Process the CRPS for a given number of analogues for every day of the 
@@ -126,6 +127,7 @@ crpsVector <- function(A, nb.analogs = 0, a=0.44, b=0.12) {
   
   return(crps.vect)
 }
+
 
 #' Process the CRPS weighted by the analogy criteria for the target period..
 #'
@@ -180,6 +182,7 @@ crpsVectorWeightedByCriteria <- function(A, scale = 1, nb.analogs = 0, a=0.44, b
   
   return(crps.vect)
 }
+
 
 #' Get the contribution to the CRPS per predictand classes.
 #'

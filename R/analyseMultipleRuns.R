@@ -71,6 +71,7 @@ getCrpss <- function(directory, datasets, methods, period) {
   stations
 }
 
+
 #' Process the CRPSS conditionally to predictand thresholds
 #'
 #' Process the CRPSS of multiple methods / datasets conditionally to predictand thresholds
@@ -213,6 +214,7 @@ getCrpssThresholds <- function(directory, predictandDB, datasets, methods, perio
   stations
 }
 
+
 #' Process the correlation coefficient
 #'
 #' Process the correlation coefficient of multiple methods / datasets
@@ -295,6 +297,7 @@ getCorrel <- function(directory, datasets, methods, period) {
   stations
 }
 
+
 #' Process the monthly correlation coefficients
 #'
 #' Process the monthly correlation coefficients of multiple methods / datasets
@@ -370,6 +373,7 @@ getCorrelMonthly <- function(directory, datasets, methods, period) {
   
   stations
 }
+
 
 #' Process the annual correlation coefficients
 #'
@@ -461,6 +465,7 @@ getCorrelYearly <- function(directory, datasets, methods, startYear, endYear) {
   
   stations
 }
+
 
 #' Process the inter-annual correlation coefficients
 #'
@@ -569,6 +574,7 @@ getInterannualCorrel <- function(directory, datasets, methods, startYear, endYea
   stations
 }
 
+
 #' Process the precipitation annual totals
 #'
 #' Process the precipitation annual totals of multiple methods / datasets
@@ -670,6 +676,7 @@ getAnnualTotals <- function(directory, datasets, methods, startYear, endYear) {
   
   totals
 }
+
 
 #' Process the precipitation monthly totals
 #'
@@ -779,6 +786,7 @@ getMonthlyTotals <- function(directory, datasets, methods, startYear, endYear) {
   
   totals
 }
+
 
 #' Process the bias of multiple methods / datasets
 #'
