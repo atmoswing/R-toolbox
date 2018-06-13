@@ -48,17 +48,28 @@ parseAllNcOutputs <- function(directory, station.id, period, level = 1) {
   AD.nc = ncdf4::nc_open(path.dates)
   AS.nc = ncdf4::nc_open(path.scores)
   
+  # Get correct variable names
+  analog_raw_name <- 'undefined'
+  target_raw_name <- 'undefined'
+  if ('analog_values_raw' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_raw'
+    target_raw_name <- 'target_values_raw'
+  } else if ('analog_values_gross' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_gross'
+    target_raw_name <- 'target_values_gross'
+  }
+  
   # Extract data
   AM <- list(
     analog.dates.MJD = t(ncdf4::ncvar_get(AD.nc, 'analog_dates')),
     analog.criteria = t(ncdf4::ncvar_get(AV.nc, 'analog_criteria')),
     analog.values.norm = t(ncdf4::ncvar_get(AV.nc, 'analog_values_norm')),
-    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
+    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, analog_raw_name)),
     target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
     target.dates.UTC = as.Date(astroFns::dmjd2ut(
       ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d'),
     target.values.norm = ncdf4::ncvar_get(AV.nc, 'target_values_norm'),
-    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
+    target.values.raw = ncdf4::ncvar_get(AV.nc, target_raw_name),
     predict.score = t(ncdf4::ncvar_get(AS.nc, 'forecast_scores'))
   )
   
@@ -105,19 +116,8 @@ parseDatesNcOutputs <- function(directory, station.id, period, level = 1) {
   assertthat::assert_that(file.exists(path.dates), 
                           msg = paste(path.dates, 'not found'))
   
-  # Open all files
-  AD.nc = ncdf4::nc_open(path.dates)
-  
-  # Extract data
-  AM <- list(
-    analog.dates.MJD = t(ncdf4::ncvar_get(AD.nc, 'analog_dates')),
-    target.dates.MJD = ncdf4::ncvar_get(AD.nc, 'target_dates'),
-    target.dates.UTC = as.Date(astroFns::dmjd2ut(
-      ncdf4::ncvar_get(AD.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d')
-  )
-  
-  # Close all files
-  ncdf4::nc_close(AD.nc)
+  # Parse the file
+  AM <- parseDatesNcFile(path.dates)
   
   return(AM)
 } 
@@ -196,20 +196,8 @@ parseValuesNcOutputs <- function(directory, station.id, period, level = 1) {
   assertthat::assert_that(file.exists(path.values), 
                           msg = paste(path.values, 'not found'))
   
-  # Open all files
-  AV.nc = ncdf4::nc_open(path.values)
-  
-  # Extract data
-  AM <- list(
-    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
-    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
-    target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
-    target.dates.UTC = as.Date(astroFns::dmjd2ut(
-      ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d')
-  )
-  
-  # Close all files
-  ncdf4::nc_close(AV.nc)
+  # Parse the file
+  AM <- atmoswing::parseValuesNcFile(path.values)
   
   return(AM)
 } 
@@ -239,10 +227,22 @@ parseValuesNcFile <- function(filePath) {
   # Open all files
   AV.nc = ncdf4::nc_open(filePath)
   
+  # Get correct variable names
+  analog_raw_name <- 'undefined'
+  target_raw_name <- 'undefined'
+  if ('analog_values_raw' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_raw'
+    target_raw_name <- 'target_values_raw'
+  } else if ('analog_values_gross' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_gross'
+    target_raw_name <- 'target_values_gross'
+  }
+  
   # Extract data
   AM <- list(
-    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, 'analog_values_gross')),
-    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
+    ncdf4::
+    analog.values.raw = t(ncdf4::ncvar_get(AV.nc, analog_raw_name)),
+    target.values.raw = ncdf4::ncvar_get(AV.nc, target_raw_name),
     target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
     target.dates.UTC = as.Date(astroFns::dmjd2ut(
       ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d')
