@@ -902,3 +902,133 @@ getBias <- function(directory, predictandDB, datasets, methods, startYear, endYe
   
   stations
 }
+
+
+#' Get the percentage of similar analogue dates between reanalyses
+#'
+#' Get the percentage of similar analogue dates between reanalyses per method
+#'
+#' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
+#' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
+#' @param methods List of methods (must be used as folder names - e.g. /4Z/)
+#' @param period Either "calibration" or "validation".
+#' @param q.threshold Optional precipitation threshold (for target dates). It is expressed as a quantile of days with precipitation (put -1 to ignore)
+#'
+#' @return Dataframe with the percentage of similar analogue dates
+#'
+#' @examples
+#' \dontrun{
+#' datasets <- c('CFSR', 'ERA-20C', 'JRA-55')
+#' methods <- c('2Z', '4Z', '4Z-2MI')
+#' stations <- atmoswing::getBias('path/to/runs', 'path/to/db', datasets, methods, 'validation', 0.99)
+#' }
+#' 
+#' @export
+#' 
+getPercentageSimilarDates <- function(directory, predictandDB, datasets, methods, period, q.threshold) {
+  
+  stations <- atmoswing::createStationsDataframe(predictandDB)
+  
+  # Initilize cluster
+  cl <- makeCluster(detectCores())
+  
+  # List run dirs
+  dirs <- list.dirs(c(dir.data, ""), full.names = TRUE, recursive = TRUE)
+  dirs <- dirs[ grep("results", dirs) ]
+  dirs <- dirs[ grep("results/", dirs, invert = TRUE) ]
+  
+  
+  # Functions
+  compareDates <- function(dataset2, stations, dirs, datasets, dataset1, methods, method, period, q.threshold) {
+    
+    comparePerStation <- function(i_st, dirsSlct1, dirsSlct2, period, method, q.threshold) {
+      
+      # Parse analog dates files
+      pattern <- paste('AnalogDates_id_', i_st, '_step_.{1}', sep='')
+      
+      resFile1 <- list.files(paste(dirsSlct1[1], period, sep = "/"), 
+                             pattern = pattern, full.names = TRUE, 
+                             recursive = TRUE)
+      assertthat::assert_that(length(resFile1) == 1)
+      res1 <- atmoswing::parseDatesNcFile(resFile1)
+      
+      resFile2 <- list.files(paste(dirsSlct2[1], period, sep = "/"), 
+                             pattern = pattern, full.names = TRUE, 
+                             recursive = TRUE)
+      assertthat::assert_that(length(resFile2) == 1)
+      res2 <- atmoswing::parseDatesNcFile(resFile2)
+      
+      # Parse analog values files
+      if (q.threshold >= 0) {
+        pattern <- paste('AnalogValues_id_', i_st, '_step_.{1}', sep='')
+        
+        prcFile <- list.files(paste(dirsSlct1[1], period, sep = "/"), 
+                              pattern = pattern, full.names = TRUE, 
+                              recursive = TRUE)
+        assertthat::assert_that(length(prcFile) == 1)
+        prc <- atmoswing::parseValuesNcFile(prcFile)
+      }
+      
+      if (q.threshold == 0) {
+        threshold <- 0
+      } else if (q.threshold < 0) {
+        threshold <- -99
+      } else {
+        threshold <- quantile(prc$target.values.raw[prc$target.values.raw>0.1], q.threshold)[[1]]
+      }
+      
+      counter <- 0
+      tot <- 0
+      for (i_target in seq(1,nrow(res1$analog.dates.MJD))) {
+        if (threshold < 0 || prc$target.values.raw[i_target] > threshold) {
+          analogs1 <- res1$analog.dates.MJD[i_target,]
+          analogs2 <- res2$analog.dates.MJD[i_target,]
+          tot <- tot + length(analogs1)
+          for(analog in analogs1) {
+            if(match(analog, analogs2, nomatch = 0) > 0) {
+              counter <- counter+1
+            }
+          }
+        }
+      }
+      
+      counter / tot
+    }
+    
+    dirMeth <- dirs[ grep(paste("/", method, '/', sep = ""), dirs) ]
+    
+    dirsSlct1 <- dirMeth[ grep(paste("/", dataset1, '/', sep = ""), dirMeth) ]
+    dirsSlct2 <- dirMeth[ grep(paste("/", dataset2, '/', sep = ""), dirMeth) ]
+    
+    assertthat::assert_that(length(dirsSlct1) == 1)
+    assertthat::assert_that(length(dirsSlct2) == 1)
+    
+    simiPerStation <- sapply(1:nrow(stations), comparePerStation, dirsSlct1, dirsSlct2, period, method, q.threshold)
+    
+    mean(simiPerStation)
+  }
+  
+  results <- array(data = NA, dim=c(length(methods), length(datasets), length(datasets)), dimnames = list(methods, datasets, datasets))
+  
+  # Parse files
+  i_m <- 0
+  pb <- txtProgressBar(max = length(datasets)*length(methods))
+  for (method in methods) {
+    i_m <- i_m + 1
+    i_col <- 0
+    for (dataset1 in datasets) {
+      i_col <- i_col + 1
+      
+      res <- parLapply(cl, datasets, compareDates, stations, dirs, datasets, dataset1, methods, method, period, q.threshold)
+      results[i_m, , i_col] <- unlist(res)
+      
+      setTxtProgressBar(pb, value = getTxtProgressBar(pb)+1)
+    }
+  }
+  
+  stopCluster(cl)
+  close(pb)
+  
+  results <- results*100
+}
