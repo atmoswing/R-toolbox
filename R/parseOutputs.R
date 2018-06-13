@@ -240,7 +240,6 @@ parseValuesNcFile <- function(filePath) {
   
   # Extract data
   AM <- list(
-    ncdf4::
     analog.values.raw = t(ncdf4::ncvar_get(AV.nc, analog_raw_name)),
     target.values.raw = ncdf4::ncvar_get(AV.nc, target_raw_name),
     target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
