@@ -355,6 +355,7 @@ createStationsDataframe <- function(predictandDB) {
 #' optimizer.
 #'
 #' @param directory Root directory of multiple runs.
+#' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
 #'
@@ -369,9 +370,9 @@ createStationsDataframe <- function(predictandDB) {
 #' 
 #' @export
 #' 
-parseAllResultsText <- function(directory, datasets, methods) {
+parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
   
-  stations <- atmoswing::createStationsDataframe()
+  stations <- atmoswing::createStationsDataframe(predictandDB)
   
   # List run files
   files <- list.files(c(directory, ""), pattern = "_station_(.*)_best_parameters.txt", 
