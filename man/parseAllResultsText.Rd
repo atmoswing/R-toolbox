@@ -4,7 +4,7 @@
 \alias{parseAllResultsText}
 \title{Parse parameters resulting from AtmoSwing optimizer.}
 \usage{
-parseAllResultsText(directory, predictandDB, datasets, methods)
+parseAllResultsText(directory, predictandDB, datasets, methods, verbose = F)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}
@@ -14,6 +14,8 @@ parseAllResultsText(directory, predictandDB, datasets, methods)
 \item{datasets}{List of datasets (must be used as folder names - e.g. /JRA-55/)}
 
 \item{methods}{List of methods (must be used as folder names - e.g. /4Z/)}
+
+\item{verbose}{Option to get verbose messages.}
 }
 \value{
 Results of the analogue method.
