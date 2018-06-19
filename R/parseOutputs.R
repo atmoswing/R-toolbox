@@ -358,6 +358,7 @@ createStationsDataframe <- function(predictandDB) {
 #' @param predictandDB Path to the predictand DB.
 #' @param datasets List of datasets (must be used as folder names - e.g. /JRA-55/)
 #' @param methods List of methods (must be used as folder names - e.g. /4Z/)
+#' @param verbose Option to get verbose messages.
 #'
 #' @return Results of the analogue method.
 #'
@@ -370,7 +371,7 @@ createStationsDataframe <- function(predictandDB) {
 #' 
 #' @export
 #' 
-parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
+parseAllResultsText <- function(directory, predictandDB, datasets, methods, verbose = F) {
   
   stations <- atmoswing::createStationsDataframe(predictandDB)
   
@@ -378,11 +379,20 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
   files <- list.files(c(directory, ""), pattern = "_station_(.*)_best_parameters.txt", 
                       full.names = TRUE, recursive = TRUE)
   
+  if (!verbose) {
+    pb <- txtProgressBar(max = length(datasets)*length(methods))
+  }
+  
   # Parse results for all datasets
-  pb <- txtProgressBar(max = length(datasets)*length(methods))
   for (dataset in datasets) {
+    if (verbose) {
+      message(paste("Dataset:", dataset))
+    }
     filesSlctDat <- files[ grep(paste("/", dataset, "/", sep = ""), files) ]
     for (method in methods) {
+      if (verbose) {
+        message(paste("Method:", method))
+      }
       filesSlct <- filesSlctDat[ grep(paste("/", method, "/", sep = ""), filesSlctDat) ]
       fieldNameCalib <- paste(dataset, "_", method, "_calib", sep = "")
       fieldNameValid <- paste(dataset, "_", method, "_valid", sep = "")
@@ -404,6 +414,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Anb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldAnb, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -415,6 +428,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Xmin")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXmin, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -425,6 +441,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         # Ymin
         pos <- which(dat == "Ymin")
         for (i in 1:length(pos)) {
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           fullFieldName <- paste(fieldYmin, "_", i, sep = "")
           
           if(!fullFieldName %in% colnames(stations)) {
@@ -437,6 +456,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Xstep")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXstep, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -448,6 +470,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Ystep")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldYstep, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -459,6 +484,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Xptsnb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXw, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -470,6 +498,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         pos <- which(dat == "Yptsnb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldYw, "_", i, sep = "")
+          if (verbose) {
+            message(paste("Field:", fullFieldName))
+          }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
@@ -487,11 +518,15 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods) {
         stations[[fieldNameValid]][which(stations$id == stationId)] <- dat[[posScore+3]]
       }
       
-      setTxtProgressBar(pb, value = getTxtProgressBar(pb)+1)
+      if (!verbose) {
+        setTxtProgressBar(pb, value = getTxtProgressBar(pb)+1)
+      }
     }
   }
   
-  close(pb)
+  if (!verbose) {
+    close(pb)
+  }
   
   stations
 }
