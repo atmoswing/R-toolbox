@@ -4,10 +4,12 @@
 \alias{parseAllResultsText}
 \title{Parse parameters resulting from AtmoSwing optimizer.}
 \usage{
-parseAllResultsText(directory, datasets, methods)
+parseAllResultsText(directory, predictandDB, datasets, methods)
 }
 \arguments{
 \item{directory}{Root directory of multiple runs.}
+
+\item{predictandDB}{Path to the predictand DB.}
 
 \item{datasets}{List of datasets (must be used as folder names - e.g. /JRA-55/)}
 
