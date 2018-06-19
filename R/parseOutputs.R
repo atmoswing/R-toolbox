@@ -494,7 +494,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
           }
-          stations[[fullFieldName]][which(stations$id == stationId)] <- (dat[[pos[[i]]+1]] - 1) * dat[[pos[[i]]+9]]
+          stations[[fullFieldName]][which(stations$id == stationId)] <- (dat[[pos[[i]]+1]] - 1) * dat[[pos[[i]]+3]]
         }
         
         # Ypts
