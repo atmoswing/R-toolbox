@@ -428,7 +428,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Xmin
-        pos <- which(dat == "Xmin" || dat == "xMin")
+        pos <- which(dat == "Xmin" | dat == "xMin")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXmin, "_", i, sep = "")
           if (verbose) {
@@ -442,7 +442,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Ymin
-        pos <- which(dat == "Ymin" || dat == "yMin")
+        pos <- which(dat == "Ymin" | dat == "yMin")
         for (i in 1:length(pos)) {
           if (verbose) {
             message(paste("Field:", fullFieldName))
@@ -456,7 +456,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Xstep
-        pos <- which(dat == "Xstep" || dat == "xStep")
+        pos <- which(dat == "Xstep" | dat == "xStep")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXstep, "_", i, sep = "")
           if (verbose) {
@@ -470,7 +470,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Ystep
-        pos <- which(dat == "Ystep" || dat == "yStep")
+        pos <- which(dat == "Ystep" | dat == "yStep")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldYstep, "_", i, sep = "")
           if (verbose) {
@@ -484,7 +484,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Xpts
-        pos <- which(dat == "Xptsnb" || dat == "xPtsNb")
+        pos <- which(dat == "Xptsnb" | dat == "xPtsNb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXw, "_", i, sep = "")
           if (verbose) {
@@ -498,7 +498,7 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         }
         
         # Ypts
-        pos <- which(dat == "Yptsnb" || dat == "yPtsNb")
+        pos <- which(dat == "Yptsnb" | dat == "yPtsNb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldYw, "_", i, sep = "")
           if (verbose) {
