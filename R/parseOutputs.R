@@ -409,6 +409,9 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         dat <- read.delim(file, header = FALSE, skip = 1)
         posStation <- which(dat == "Station")
         stationId <- dat[[posStation+1]]
+        if (verbose) {
+          message(paste("Station:", stationId))
+        }
         
         # Analog number
         pos <- which(dat == "Anb")
