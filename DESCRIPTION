@@ -18,6 +18,7 @@ Depends:
 Imports: 
     assertthat,
     astroFns,
+    lubridate,
     ncdf4,
     parallel,
     SpecsVerification,

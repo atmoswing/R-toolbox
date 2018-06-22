@@ -78,6 +78,7 @@ getReanalysisColor <- function(reanalysis) {
     return("#00AEEF")
   } else {
     message("Reanalysis not found")
+    return("#000000")
   }
 }
 
