@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{getReanalysisColor}
 \alias{getReanalysisColor}
-\title{Get the reference color for a giver reanalysis.}
+\title{Get the reference color for a given reanalysis.}
 \usage{
 getReanalysisColor(reanalysis)
 }
@@ -13,7 +13,7 @@ getReanalysisColor(reanalysis)
 The hex color code
 }
 \description{
-Get the reference color for a giver reanalysis.
+Get the reference color for a given reanalysis.
 }
 \examples{
 \dontrun{

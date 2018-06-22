@@ -39,9 +39,9 @@ reanalysis.colors <- data.frame(
 )
 
 
-#' Get the reference color for a giver reanalysis.
+#' Get the reference color for a given reanalysis.
 #'
-#' Get the reference color for a giver reanalysis.
+#' Get the reference color for a given reanalysis.
 #'
 #' @param reanalysis The name of the reanalysis.
 #'
@@ -79,6 +79,84 @@ getReanalysisColor <- function(reanalysis) {
   } else {
     message("Reanalysis not found")
   }
+}
+
+
+#' Get the reference colors for multiple reanalyses.
+#'
+#' Get the reference colors for multiple reanalyses.
+#'
+#' @param reanalyses A vector with the names of the reanalysis.
+#'
+#' @return A vector with the hex color codes
+#'
+#' @examples
+#' \dontrun{
+#' colors <- atmoswing::getReanalysesColors(c('CFSR', 'NR-1', 'JRA-55'))
+#' }
+#' 
+#' @export
+#' 
+getReanalysesColors <- function(reanalyses) {
+  
+  colors <- vector()
+  for (reanalysis in reanalyses) {
+    colors <- c(colors, atmoswing::getReanalysisColor(reanalysis))
+  }
+  
+  colors
+}
+
+
+#' Darken a given color.
+#'
+#' Darken a given color by a given factor.
+#'
+#' @param color The color to darken
+#' @param factor The factor used for darkening
+#'
+#' @return The darkened color
+#'
+#' @examples
+#' \dontrun{
+#' color <- atmoswing::darken("#AD71B5", 1.5)
+#' }
+#' 
+#' @export
+#' 
+darken <- function(color, factor=1.4){
+  
+  col <- col2rgb(color)
+  col <- col/factor
+  col <- rgb(t(col), maxColorValue=255)
+  
+  col
+}
+
+
+#' Lighten a given color.
+#'
+#' Lighten a given color by a given factor.
+#'
+#' @param color The color to lighten
+#' @param factor The factor used for lightening
+#'
+#' @return The lightened color
+#'
+#' @examples
+#' \dontrun{
+#' color <- atmoswing::lighten("#AD71B5", 1.5)
+#' }
+#' 
+#' @export
+#' 
+lighten <- function(color, factor=1.4){
+  
+  col <- col2rgb(color)
+  col <- col*factor
+  col <- rgb(t(col), maxColorValue=255)
+  
+  col
 }
 
 
