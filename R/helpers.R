@@ -119,12 +119,12 @@ getReanalysesColors <- function(reanalyses) {
 #'
 #' @examples
 #' \dontrun{
-#' color <- atmoswing::darken("#AD71B5", 1.5)
+#' color <- atmoswing::darkenColor("#AD71B5", 1.5)
 #' }
 #' 
 #' @export
 #' 
-darken <- function(color, factor=1.4){
+darkenColor <- function(color, factor=1.4){
   
   col <- col2rgb(color)
   col <- col/factor
@@ -145,12 +145,12 @@ darken <- function(color, factor=1.4){
 #'
 #' @examples
 #' \dontrun{
-#' color <- atmoswing::lighten("#AD71B5", 1.5)
+#' color <- atmoswing::lightenColor("#AD71B5", 1.5)
 #' }
 #' 
 #' @export
 #' 
-lighten <- function(color, factor=1.4){
+lightenColor <- function(color, factor=1.4){
   
   col <- col2rgb(color)
   col <- col*factor
