@@ -401,6 +401,8 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
       fieldYmin <- paste(dataset, "_", method, "_ymin", sep = "")
       fieldXstep <- paste(dataset, "_", method, "_xstep", sep = "")
       fieldYstep <- paste(dataset, "_", method, "_ystep", sep = "")
+      fieldXpts <- paste(dataset, "_", method, "_xpts", sep = "")
+      fieldYpts <- paste(dataset, "_", method, "_ypts", sep = "")
       fieldXw <- paste(dataset, "_", method, "_xw", sep = "")
       fieldYw <- paste(dataset, "_", method, "_yw", sep = "")
       
@@ -487,28 +489,34 @@ parseAllResultsText <- function(directory, predictandDB, datasets, methods, verb
         pos <- which(dat == "Xptsnb" | dat == "xPtsNb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldXw, "_", i, sep = "")
+          fullFieldNamePts <- paste(fieldXpts, "_", i, sep = "")
           if (verbose) {
             message(paste("Field:", fullFieldName))
           }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
+            stations[fullFieldNamePts] <- NA
           }
           stations[[fullFieldName]][which(stations$id == stationId)] <- (dat[[pos[[i]]+1]] - 1) * dat[[pos[[i]]+3]]
+          stations[[fullFieldNamePts]][which(stations$id == stationId)] <- dat[[pos[[i]]+1]]
         }
         
         # Ypts
         pos <- which(dat == "Yptsnb" | dat == "yPtsNb")
         for (i in 1:length(pos)) {
           fullFieldName <- paste(fieldYw, "_", i, sep = "")
+          fullFieldNamePts <- paste(fieldYpts, "_", i, sep = "")
           if (verbose) {
             message(paste("Field:", fullFieldName))
           }
           
           if(!fullFieldName %in% colnames(stations)) {
             stations[fullFieldName] <- NA
+            stations[fullFieldNamePts] <- NA
           }
           stations[[fullFieldName]][which(stations$id == stationId)] <- (dat[[pos[[i]]+1]] - 1) * dat[[pos[[i]]+3]]
+          stations[[fullFieldNamePts]][which(stations$id == stationId)] <- dat[[pos[[i]]+1]]
         }
         
         # Score
