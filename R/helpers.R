@@ -1,14 +1,13 @@
 #' Build a dataframe with the predefined color per reanalysis
 #'
 #' Build a dataframe with the predefined color per reanalysis based on "The 
-#' S-RIP colour definitions for reanalysis datasets" (Updated on 11 July 2017, 
-#' for the S-RIP Full Report 2018)
+#' S-RIP colour definitions for reanalysis datasets"
 #' https://s-rip.ees.hokudai.ac.jp/mediawiki/index.php/Notes_for_Authors
 #'
 #' @return The colors dataframe.
 #' 
 #' @note 
-#' The S-RIP colour definitions for reanalysis datasets (Updated on 11 July 2017, for the S-RIP Full Report 2018)
+#' The S-RIP colour definitions for reanalysis datasets
 #' https://s-rip.ees.hokudai.ac.jp/mediawiki/index.php/Notes_for_Authors
 #' Reanalyses	R, G, B	Hexadecimal	Notes
 #' MERRA-2	226, 31, 38	#E21F26	
@@ -34,8 +33,8 @@
 #' @export
 #' 
 reanalysis.colors <- data.frame(
-  id = c(   "NR-1",    "NR-2",    "ERA-INT", "CFSR",    "JRA-55",  "JRA-55C", "20CR-2c", "ERA-20C", "MERRA-2", "CERA-20C"),
-  color = c("#F57E20", "#FDBF6E", "#295F8A", "#34A048", "#723B7A", "#AD71B5", "#EC008C", "#60C8E8", "#E21F26", "#00AEEF")
+  id = c(   "NR-1",    "NR-2",    "ERA-INT", "CFSR",    "JRA-55",  "JRA-55C", "20CR-2c", "ERA-20C", "MERRA-2", "CERA-20C", "ERA5"),
+  color = c("#F57E20", "#FDBF6E", "#295F8A", "#34A048", "#723B7A", "#AD71B5", "#EC008C", "#60C8E8", "#E21F26", "#00AEEF",  "#5F98C6")
 )
 
 
@@ -76,6 +75,8 @@ getReanalysisColor <- function(reanalysis) {
     return("#E21F26")
   } else if (reanalysis == "CERA-20C") {
     return("#00AEEF")
+  } else if (reanalysis == "ERA5") {
+    return("#5F98C6")
   } else {
     message("Reanalysis not found")
     return("#000000")
