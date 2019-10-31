@@ -51,12 +51,18 @@ parseAllNcOutputs <- function(directory, station.id, period, level = 1) {
   # Get correct variable names
   analog_raw_name <- 'undefined'
   target_raw_name <- 'undefined'
+  scores_name <- 'undefined'
   if ('analog_values_raw' %in% names(AV.nc$var)) {
     analog_raw_name <- 'analog_values_raw'
     target_raw_name <- 'target_values_raw'
   } else if ('analog_values_gross' %in% names(AV.nc$var)) {
     analog_raw_name <- 'analog_values_gross'
     target_raw_name <- 'target_values_gross'
+  }
+  if ('forecast_scores' %in% names(AS.nc$var)) {
+    scores_name <- 'forecast_scores'
+  } else if ('scores' %in% names(AS.nc$var)) {
+    scores_name <- 'scores'
   }
   
   # Extract data
@@ -70,7 +76,7 @@ parseAllNcOutputs <- function(directory, station.id, period, level = 1) {
       ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d'),
     target.values.norm = ncdf4::ncvar_get(AV.nc, 'target_values_norm'),
     target.values.raw = ncdf4::ncvar_get(AV.nc, target_raw_name),
-    predict.score = t(ncdf4::ncvar_get(AS.nc, 'forecast_scores'))
+    predict.score = t(ncdf4::ncvar_get(AS.nc, scores_name))
   )
   
   # Close all files
@@ -297,14 +303,31 @@ parseScoresNcOutputs <- function(directory, station.id, period, level = 1) {
   AV.nc = ncdf4::nc_open(path.values)
   AS.nc = ncdf4::nc_open(path.scores)
   
+  # Get correct variable names
+  analog_raw_name <- 'undefined'
+  target_raw_name <- 'undefined'
+  scores_name <- 'undefined'
+  if ('analog_values_raw' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_raw'
+    target_raw_name <- 'target_values_raw'
+  } else if ('analog_values_gross' %in% names(AV.nc$var)) {
+    analog_raw_name <- 'analog_values_gross'
+    target_raw_name <- 'target_values_gross'
+  }
+  if ('forecast_scores' %in% names(AS.nc$var)) {
+    scores_name <- 'forecast_scores'
+  } else if ('scores' %in% names(AS.nc$var)) {
+    scores_name <- 'scores'
+  }
+  
   # Extract data
   AM <- list(
     target.dates.MJD = ncdf4::ncvar_get(AV.nc, 'target_dates'),
     target.dates.UTC = as.Date(astroFns::dmjd2ut(
       ncdf4::ncvar_get(AV.nc, 'target_dates'), tz= 'UTC' ), format='%Y.%m.%d'),
     target.values.norm = ncdf4::ncvar_get(AV.nc, 'target_values_norm'),
-    target.values.raw = ncdf4::ncvar_get(AV.nc, 'target_values_gross'),
-    predict.score = t(ncdf4::ncvar_get(AS.nc, 'forecast_scores'))
+    target.values.raw = ncdf4::ncvar_get(AV.nc, analog_raw_name),
+    predict.score = t(ncdf4::ncvar_get(AS.nc, scores_name))
   )
   
   # Close all files
